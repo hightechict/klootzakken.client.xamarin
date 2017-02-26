@@ -4,8 +4,6 @@ using IO.Swagger.Model;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using Newtonsoft.Json;
-using Android.Renderscripts;
-using System.Text;
 
 namespace KlootzakkenClient
 {
