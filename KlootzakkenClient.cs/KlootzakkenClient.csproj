@@ -81,8 +81,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Activities\MainMenuActivity.cs" />
-    <Compile Include="Services\WebApiService.cs" />
+    <Compile Include="Services\WebApiGetService.cs" />
     <Compile Include="Activities\MainActivity.cs" />
+    <Compile Include="Services\WebApiPostService.cs" />
     <Compile Include="Utils\RequestVerificationTokenGetter.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
