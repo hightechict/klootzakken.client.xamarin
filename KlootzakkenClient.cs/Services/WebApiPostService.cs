@@ -24,7 +24,7 @@ namespace KlootzakkenClient.cs.Services
 
         private const string _accessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI3YmUyMjI1NS0xMTFkLTQyNjUtYjkzNi0zY2I3NDQ2NWVmZGQiLCJ1bmlxdWVfbmFtZSI6ImRhbmllbC5tb2thQGhpZ2h0ZWNoaWN0Lm5sIiwiQXNwTmV0LklkZW50aXR5LlNlY3VyaXR5U3RhbXAiOiI4YTIyMTcwMC1kYjYzLTRiOWYtYWNiOC1mZTJjMDFiOWZjZmMiLCJuYmYiOjE0ODgyMTUzMjksImV4cCI6MTQ4ODMwMTcyOSwiaWF0IjoxNDg4MjE1MzI5LCJpc3MiOiJEaXZ2ZXJlbmNlLmNvbSBLbG9vdHpha2tlbiIsImF1ZCI6IkRlbW9BdWRpZW5jZSJ9.tY2HOrmqrWDY8rdYnCtYzfGtEvJk5EeT6dfdRWUDOPg";
 
-        public static async Task<bool> PostDataToWebApi(string name, bool isPublic = false)
+        private static async Task<bool> PostDataToWebApi(string name, bool isPublic = false)
         {
             var success = false;
             using (var client = new HttpClient())
