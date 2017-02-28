@@ -9,9 +9,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: global::Android.Runtime.ResourceDesignerAttribute("KlootzakkenClient.cs.Resource", IsApplication=true)]
+[assembly: global::Android.Runtime.ResourceDesignerAttribute("Klootzakken.Client.Resource", IsApplication=true)]
 
-namespace KlootzakkenClient.cs
+namespace Klootzakken.Client
 {
 	
 	
@@ -26,7 +26,7 @@ namespace KlootzakkenClient.cs
 		
 		public static void UpdateIdValues()
 		{
-			global::ModernHttpClient.Resource.String.library_name = global::KlootzakkenClient.cs.Resource.String.library_name;
+			global::ModernHttpClient.Resource.String.library_name = global::Klootzakken.Client.Resource.String.library_name;
 		}
 		
 		public partial class Attribute

@@ -9,6 +9,7 @@ namespace KlootzakkenClient
 {
     public static class WebApiGetService
     {
+        //TODO: refactor it like in PostService
         public static async Task<List<LobbyView>> GetMyGames()
         {
             return await GetFromWebApi<LobbyView>("myGames");
@@ -35,7 +36,7 @@ namespace KlootzakkenClient
         }
 
 
-        private const string _accessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI3YmUyMjI1NS0xMTFkLTQyNjUtYjkzNi0zY2I3NDQ2NWVmZGQiLCJ1bmlxdWVfbmFtZSI6ImRhbmllbC5tb2thQGhpZ2h0ZWNoaWN0Lm5sIiwiQXNwTmV0LklkZW50aXR5LlNlY3VyaXR5U3RhbXAiOiI4YTIyMTcwMC1kYjYzLTRiOWYtYWNiOC1mZTJjMDFiOWZjZmMiLCJuYmYiOjE0ODgyMTUzMjksImV4cCI6MTQ4ODMwMTcyOSwiaWF0IjoxNDg4MjE1MzI5LCJpc3MiOiJEaXZ2ZXJlbmNlLmNvbSBLbG9vdHpha2tlbiIsImF1ZCI6IkRlbW9BdWRpZW5jZSJ9.tY2HOrmqrWDY8rdYnCtYzfGtEvJk5EeT6dfdRWUDOPg";
+        private const string _accessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI3YmUyMjI1NS0xMTFkLTQyNjUtYjkzNi0zY2I3NDQ2NWVmZGQiLCJ1bmlxdWVfbmFtZSI6ImRhbmllbC5tb2thQGhpZ2h0ZWNoaWN0Lm5sIiwiQXNwTmV0LklkZW50aXR5LlNlY3VyaXR5U3RhbXAiOiI4YTIyMTcwMC1kYjYzLTRiOWYtYWNiOC1mZTJjMDFiOWZjZmMiLCJuYmYiOjE0ODgzMDQ4MTAsImV4cCI6MTQ4ODM5MTIxMCwiaWF0IjoxNDg4MzA0ODEwLCJpc3MiOiJEaXZ2ZXJlbmNlLmNvbSBLbG9vdHpha2tlbiIsImF1ZCI6IkRlbW9BdWRpZW5jZSJ9.ctjrQuq_3XItJIWs99jCV4f3uJWX11_7xlzIHtn89KE";
 
         private static async Task<List<T>> GetFromWebApi<T>(string urlEnding)
         {

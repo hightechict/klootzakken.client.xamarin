@@ -2,9 +2,9 @@
 using Android.Widget;
 using Android.OS;
 using KlootzakkenClient.Activities;
-using KlootzakkenClient.cs;
+using Klootzakken.Client;
 
-namespace KlootzakkenClient
+namespace Klootzakken.Client
 {
     [Activity(Label = "KlootzakkenClient", MainLauncher = true, Icon = "@drawable/icon")]
     public class MainActivity : Activity

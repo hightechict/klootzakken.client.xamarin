@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26127.3
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KlootzakkenClient", "KlootzakkenClient.cs\KlootzakkenClient.csproj", "{C2F02860-277D-4755-9F02-78F91CD5C311}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Klootzakken.Client", "Klootzakken.Client\KlootzakkenClient.csproj", "{C2F02860-277D-4755-9F02-78F91CD5C311}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IO.Swagger", "..\GeneraterdApiEnv\csharp-client-generated\csharp-client\src\IO.Swagger\IO.Swagger.csproj", "{FE83999D-A31E-4A0E-ADAD-741486C6C9C4}"
 EndProject
