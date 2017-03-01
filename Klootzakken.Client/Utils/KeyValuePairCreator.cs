@@ -12,7 +12,7 @@ using Android.Widget;
 
 namespace Klootzakken.Client.Utils
 {
-    public static class KeyValuePair
+    public static class KeyValuePairCreator
     {
         public static KeyValuePair<K, V> Create<K, V>(K key, V value)
         {

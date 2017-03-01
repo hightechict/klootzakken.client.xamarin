@@ -100,7 +100,7 @@
     <Compile Include="Services\WebApiGetService.cs" />
     <Compile Include="Activities\MainActivity.cs" />
     <Compile Include="Services\WebApiPostService.cs" />
-    <Compile Include="Utils\KeyValuePair.cs" />
+    <Compile Include="Utils\KeyValuePairCreator.cs" />
     <Compile Include="Utils\RequestVerificationTokenGetter.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
