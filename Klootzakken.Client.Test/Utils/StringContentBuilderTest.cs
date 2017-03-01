@@ -9,8 +9,6 @@ namespace Klootzakken.Client.Tests
     {
         private StringContentBuilder stringContentBuilder = new StringContentBuilder(Encoding.UTF8, "application/json");
 
-
-
         [Fact]
         public void nullParameter_createStringContent_returnEmptyContent()
         {
@@ -21,7 +19,6 @@ namespace Klootzakken.Client.Tests
             Assert.Equal(stringContent.ReadAsStringAsync().Result, "{}");
         }
 
-
         [Fact]
         public void OneKeyValueParameter_CreateStringContent_StringContentIsBuiltUp () {
             var stringContent = stringContentBuilder.build(KeyValuePairCreator.Create("name", "DanielsLobby"));
@@ -30,8 +27,6 @@ namespace Klootzakken.Client.Tests
             Assert.Equal(stringContent.Headers.ContentType.MediaType, "application/json");
             Assert.Equal(stringContent.ReadAsStringAsync().Result, "{\"name\":\"DanielsLobby\"}");
         }
-
-
 
         [Fact]
         public void MultipleKeyValueParameters_CreateStringContent_StringContentIsBuiltUp()
