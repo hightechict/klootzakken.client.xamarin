@@ -64,8 +64,5 @@ namespace KlootzakkenClient.cs.Services
                 return response.IsSuccessStatusCode;
             }
         }
-
-
     }
-
 }
