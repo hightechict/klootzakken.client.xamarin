@@ -1,32 +1,27 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 using System.Threading.Tasks;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.IO;
+using Klootzakken.Client.Utils;
+using System.Text;
+using System.Collections.Generic;
 
 namespace KlootzakkenClient.cs.Services
 {
     public class WebApiPostService
     {
+        private static StringContent CreateStringContent(KeyValuePair<string, string> keyValuePair) => new StringContentBuilder(Encoding.UTF8, "application/json").build(keyValuePair);
+
         //TODO: finnish the refactor stuff, make a stringContent Builder with buildern pattern
         public static async Task<bool> CreateLobbyAsync(string lobbyName)
         {
             var requestUrl = "http://www.glueware.nl/Klootzakken/kzapi/lobby/create/" + lobbyName;
+
             var parameter = new StringContent("{\"name\":\"" + lobbyName + "\"}",
                                      Encoding.UTF8,
                                      "application/json");
 
-            return await PostToWebApi(requestUrl, parameter);
+            //TODO: test it! if it works, refactor it
+            return await PostToWebApi(requestUrl, CreateStringContent(KeyValuePairCreator.Create<string, string>("name", lobbyName)));
         }
 
         public static async Task<bool> JoinLobby(string lobbyId)
@@ -50,6 +45,10 @@ namespace KlootzakkenClient.cs.Services
         }
 
         private const string _accessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI3YmUyMjI1NS0xMTFkLTQyNjUtYjkzNi0zY2I3NDQ2NWVmZGQiLCJ1bmlxdWVfbmFtZSI6ImRhbmllbC5tb2thQGhpZ2h0ZWNoaWN0Lm5sIiwiQXNwTmV0LklkZW50aXR5LlNlY3VyaXR5U3RhbXAiOiI4YTIyMTcwMC1kYjYzLTRiOWYtYWNiOC1mZTJjMDFiOWZjZmMiLCJuYmYiOjE0ODgzMDQ4MTAsImV4cCI6MTQ4ODM5MTIxMCwiaWF0IjoxNDg4MzA0ODEwLCJpc3MiOiJEaXZ2ZXJlbmNlLmNvbSBLbG9vdHpha2tlbiIsImF1ZCI6IkRlbW9BdWRpZW5jZSJ9.ctjrQuq_3XItJIWs99jCV4f3uJWX11_7xlzIHtn89KE";
+
+        public static Encoding Encoding => _charSet;
+
+        public static Encoding Encoding1 => _charSet;
 
         private static async Task<bool> PostToWebApi(string url, StringContent parameter)
         {
