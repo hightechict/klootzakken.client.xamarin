@@ -46,10 +46,6 @@ namespace KlootzakkenClient.cs.Services
 
         private const string _accessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI3YmUyMjI1NS0xMTFkLTQyNjUtYjkzNi0zY2I3NDQ2NWVmZGQiLCJ1bmlxdWVfbmFtZSI6ImRhbmllbC5tb2thQGhpZ2h0ZWNoaWN0Lm5sIiwiQXNwTmV0LklkZW50aXR5LlNlY3VyaXR5U3RhbXAiOiI4YTIyMTcwMC1kYjYzLTRiOWYtYWNiOC1mZTJjMDFiOWZjZmMiLCJuYmYiOjE0ODgzMDQ4MTAsImV4cCI6MTQ4ODM5MTIxMCwiaWF0IjoxNDg4MzA0ODEwLCJpc3MiOiJEaXZ2ZXJlbmNlLmNvbSBLbG9vdHpha2tlbiIsImF1ZCI6IkRlbW9BdWRpZW5jZSJ9.ctjrQuq_3XItJIWs99jCV4f3uJWX11_7xlzIHtn89KE";
 
-        public static Encoding Encoding => _charSet;
-
-        public static Encoding Encoding1 => _charSet;
-
         private static async Task<bool> PostToWebApi(string url, StringContent parameter)
         {
             using (var client = new HttpClient())
