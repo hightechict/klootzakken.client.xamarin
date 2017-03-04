@@ -7,57 +7,48 @@ using System.Collections.Generic;
 
 namespace KlootzakkenClient.cs.Services
 {
-    public class WebApiPostService
+    public static class WebApiPostService
     {
+        private const string _baseUrl = "http://10.0.2.2:5000/";
+
         private static StringContent CreateStringContent(KeyValuePair<string, string> keyValuePair) => new StringContentBuilder(Encoding.UTF8, "application/json").build(keyValuePair);
 
-        //TODO: finnish the refactor stuff, make a stringContent Builder with buildern pattern
         public static async Task<bool> CreateLobbyAsync(string lobbyName)
         {
-            var requestUrl = "http://www.glueware.nl/Klootzakken/kzapi/lobby/create/" + lobbyName;
+            var requestUrl = _baseUrl + "lobby/create/" + lobbyName;
 
-            var parameter = new StringContent("{\"name\":\"" + lobbyName + "\"}",
-                                     Encoding.UTF8,
-                                     "application/json");
-
-            //TODO: test it! if it works, refactor it
             return await PostToWebApi(requestUrl, CreateStringContent(KeyValuePairCreator.Create<string, string>("name", lobbyName)));
         }
 
-        public static async Task<bool> JoinLobby(string lobbyId)
+        public static async Task<bool> JoinLobbyAsync(string lobbyId)
         {
-            var requestUrl = "http://www.glueware.nl/Klootzakken/kzapi/lobby/" + lobbyId + "/" + "join";
-            var parameter = new StringContent("{\"lobbyId\":\"" + lobbyId + "\"}",
-                                    Encoding.UTF8,
-                                    "application/json");
+            var requestUrl = _baseUrl + "lobby/" + lobbyId + "/" + "join";
 
-            return await PostToWebApi(requestUrl, parameter);
+            return await PostToWebApi(requestUrl, CreateStringContent(KeyValuePairCreator.Create<string, string>("lobbyId", lobbyId)));
         }
 
-        public static async Task<bool> StartGameForLobby(string lobbyId)
+        public static async Task<bool> StartGameForLobbyAsync(string lobbyId)
         {
-            var requestUrl = "http://www.glueware.nl/Klootzakken/kzapi/lobby/" + lobbyId + "/" + "start";
-            var parameter = new StringContent("{\"lobbyId\":\"" + lobbyId + "\"}",
-                                    Encoding.UTF8,
-                                    "application/json");
+            var requestUrl = _baseUrl + "lobby/" + lobbyId + "/" + "start";
 
-            return await PostToWebApi(requestUrl, parameter);
+            return await PostToWebApi(requestUrl, CreateStringContent(KeyValuePairCreator.Create<string, string>("lobbyId", lobbyId)));
         }
 
-        private const string _accessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI3YmUyMjI1NS0xMTFkLTQyNjUtYjkzNi0zY2I3NDQ2NWVmZGQiLCJ1bmlxdWVfbmFtZSI6ImRhbmllbC5tb2thQGhpZ2h0ZWNoaWN0Lm5sIiwiQXNwTmV0LklkZW50aXR5LlNlY3VyaXR5U3RhbXAiOiI4YTIyMTcwMC1kYjYzLTRiOWYtYWNiOC1mZTJjMDFiOWZjZmMiLCJuYmYiOjE0ODgzMDQ4MTAsImV4cCI6MTQ4ODM5MTIxMCwiaWF0IjoxNDg4MzA0ODEwLCJpc3MiOiJEaXZ2ZXJlbmNlLmNvbSBLbG9vdHpha2tlbiIsImF1ZCI6IkRlbW9BdWRpZW5jZSJ9.ctjrQuq_3XItJIWs99jCV4f3uJWX11_7xlzIHtn89KE";
+        private const string _accessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIwNGIxYmU1NS04MmE5LTRhMTItODMzZC05ZjNlNzZiMTBjMzQiLCJ1bmlxdWVfbmFtZSI6ImRhbmllbC5tb2thQGhpZ2h0ZWNoaWN0Lm5sIiwiQXNwTmV0LklkZW50aXR5LlNlY3VyaXR5U3RhbXAiOiI2MWZkZDExNC0wMzRiLTQ3ZDYtYTk1ZS0wZDQ1YzBjZmYwM2YiLCJuYmYiOjE0ODg2NTkxNDEsImV4cCI6MTQ5MTMzNzU0MSwiaWF0IjoxNDg4NjU5MTQxLCJpc3MiOiJLbG9vdHpha2tlbiBTZXJ2ZXIiLCJhdWQiOlsiQXBpVXNlcnMiLCJBcGlVc2VycyJdfQ.V-D6HQSLYVjNOwakMXlsBAbbExpzGhA_kexQSwGHYZE";
 
-        private static async Task<bool> PostToWebApi(string url, StringContent parameter)
+        private static async Task<bool> PostToWebApi(string url, StringContent requestContent)
         {
             using (var client = new HttpClient())
             {
                 HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, url);
                 request.Headers.Authorization = new AuthenticationHeaderValue("bearer", _accessToken);
-                request.Content = parameter;
+                request.Content = requestContent;
 
                 var response = await client.SendAsync(request);
 
                 return response.IsSuccessStatusCode;
             }
         }
+
     }
 }
