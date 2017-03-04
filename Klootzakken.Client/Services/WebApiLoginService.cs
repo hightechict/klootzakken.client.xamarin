@@ -16,14 +16,14 @@ namespace Klootzakken.Client.Resources.Services
         {
             string urlToCreatePin = _mainWebApiUrl + "pin/create/";
 
-            return HttpGetFromWebApi(urlToCreatePin, "pin", NoAction());
+            return HttpGetFromWebApi(urlToCreatePin, "pin", NoActionForSettingBearerToken());
         }
 
         public static string GetTemproraryTokenForAuthentication(string pin)
         {
             string urlForTemporaryTokenForAuth = _mainWebApiUrl + "pin/" + pin + "/token";
 
-            return HttpGetFromWebApi(urlForTemporaryTokenForAuth, "access_token", NoAction());
+            return HttpGetFromWebApi(urlForTemporaryTokenForAuth, "access_token", NoActionForSettingBearerToken());
         }
 
         public static string GetGameAccessToken(string temporaryAccessTokenForAuth)
@@ -33,23 +33,25 @@ namespace Klootzakken.Client.Resources.Services
             return HttpGetFromWebApi(urlForTemporaryTokenForAuth, "access_token", (client) => setBearerAuthenticationParameterForClient(client, temporaryAccessTokenForAuth));
         }
 
-        public static string HttpGetFromWebApi(string url, string resultJsonStringParameterName, Action<HttpClient> actionToSetBearerToken)
+        public static string HttpGetFromWebApi(string url, string resultJsonStringParameterName, SetBearerTokenAction setBearerTokenAction)
         {
-            string result = "";
+            string resultJsonParameterValue = "";
 
             using (var client = new HttpClient())
             {
-                actionToSetBearerToken.Invoke(client);
+                setBearerTokenAction.Invoke(client);
                 var response = client.GetAsync(url).Result;
                 var resultJson = response.Content.ReadAsStringAsync().Result;
 
-                result = JsonStringParser.GetValue(resultJsonStringParameterName, resultJson);
+                resultJsonParameterValue = JsonStringParser.GetValue(resultJsonStringParameterName, resultJson);
                 //TODO: handle error
             }
-            return result;
+            return resultJsonParameterValue;
         }
 
-        private static Action<HttpClient> NoAction()
+        public delegate void SetBearerTokenAction(HttpClient client);
+
+        private static SetBearerTokenAction NoActionForSettingBearerToken()
         {
             return (client) =>
             {
