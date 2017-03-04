@@ -51,10 +51,12 @@ namespace Klootzakken.Client.Resources.Services
 
         private static Action<HttpClient> NoAction()
         {
-            return (client) => { };
+            return (client) =>
+            {
+            };
         }
 
-        public static void setBearerAuthenticationParameterForClient(HttpClient client, string bearerToken)
+        private static void setBearerAuthenticationParameterForClient(HttpClient client, string bearerToken)
         {
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", bearerToken);
         }
