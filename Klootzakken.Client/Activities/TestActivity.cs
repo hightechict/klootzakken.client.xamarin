@@ -11,6 +11,8 @@ using Android.Views;
 using Android.Widget;
 using KlootzakkenClient.cs.Services;
 using KlootzakkenClient;
+using IO.Swagger.Model;
+using System.Threading.Tasks;
 
 namespace Klootzakken.Client.Activities
 {
@@ -25,20 +27,27 @@ namespace Klootzakken.Client.Activities
             base.OnCreate(savedInstanceState);
 
             SetContentView(Resource.Layout.MainMenuView);
-            var lobbies = await WebApiGetService.GetLobbies();
-            var isCreateGameSucces = await WebApiPostService.CreateLobbyAsync("gameDani2");
 
-            var joinedToLobby = await WebApiPostService.JoinLobby("1");
-            var gameIsStarted = await WebApiPostService.StartGameForLobby("1");
+            string randomString  = Guid.NewGuid().ToString("n").Substring(0, 8);
+
+            var isCreateGameSucces = await WebApiPostService.CreateLobbyAsync(randomString);
+            var lobbies = await WebApiGetService.GetLobbiesAsync();
+            var createdLobby = lobbies.Find(l => l.Name.Equals(randomString));
+            var joinedToLobby = await WebApiPostService.JoinLobbyAsync(createdLobby.Id);
+            var myLobbyies = await WebApiGetService.GetMyLobbiesAsync();
+            var justJoinedMyLobby = myLobbyies.Find(l => l.Name.Equals(randomString));
+            var gameIsStarted = await WebApiPostService.StartGameForLobbyAsync(createdLobby.Id);
+
+            //var status = lobbyState.Status.ToString();
 
             myGamesListView = FindViewById<ListView>(Resource.Id.myGamesListView);
             myGames = new List<string>
             {
-                lobbies[0].Name,
-                lobbies[1].Name,
-                isCreateGameSucces.ToString(),
-                joinedToLobby.ToString(),
-                gameIsStarted.ToString()
+                "GetLobbiesAsync() - " + randomString.Equals(createdLobby.Name).ToString(),
+                "GetMyLobbiesAsync() - " + randomString.Equals(justJoinedMyLobby.Name).ToString(),
+                "CreateLobbyAsync() - " + isCreateGameSucces.ToString(),
+                "JoinLobbyAsync() - " + joinedToLobby.ToString(),
+                "StartGameForLobbyAsync() - " + gameIsStarted.ToString()
             };
             myGamesListView.Adapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, myGames);
 
