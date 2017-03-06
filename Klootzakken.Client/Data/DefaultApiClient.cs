@@ -19,7 +19,7 @@ namespace Klootzakken.Client.Data
     public class DefaultApiClient : IApiClient
     {
         private readonly IAuthenticationService _authenticationService;
-        private readonly ApiClientOptions _options; //use _ for gettting rid of "this"
+        private readonly ApiClientOptions _options; //use _ for geting rid of "this"
 
         public DefaultApiClient(IAuthenticationService authenticationService, ApiClientOptions options)
         {
@@ -46,12 +46,11 @@ namespace Klootzakken.Client.Data
 
                 return JsonConvert.DeserializeObject<T>(content);
             }
-
         }
 
         private Task<string> GetTokenIfNotExistingAsync()
-        {
-            return _authenticationService.GetBearerTokenAsync("temporaryId"); //todo pass the real temp token
+        {    //TODO pass the real token ipv hardcoded one
+            return _authenticationService.GetBearerTokenAsync("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIwNGIxYmU1NS04MmE5LTRhMTItODMzZC05ZjNlNzZiMTBjMzQiLCJ1bmlxdWVfbmFtZSI6ImRhbmllbC5tb2thQGhpZ2h0ZWNoaWN0Lm5sIiwiQXNwTmV0LklkZW50aXR5LlNlY3VyaXR5U3RhbXAiOiI2MWZkZDExNC0wMzRiLTQ3ZDYtYTk1ZS0wZDQ1YzBjZmYwM2YiLCJuYmYiOjE0ODg2NTkxNDEsImV4cCI6MTQ5MTMzNzU0MSwiaWF0IjoxNDg4NjU5MTQxLCJpc3MiOiJLbG9vdHpha2tlbiBTZXJ2ZXIiLCJhdWQiOlsiQXBpVXNlcnMiLCJBcGlVc2VycyJdfQ.V-D6HQSLYVjNOwakMXlsBAbbExpzGhA_kexQSwGHYZE");
         }
 
         public Task PostAsync()
