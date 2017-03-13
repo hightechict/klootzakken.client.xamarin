@@ -1,20 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 using System.Net.Http;
 using Klootzakken.Client.Utils;
 using System.Net.Http.Headers;
+using Klootzakken.Client.App.Authentication;
 
 namespace Klootzakken.Client.Domain
 {
+    //TODO: test it ook somehow
     public class AuthenticationService : IAuthenticationService
     {
         private AuthenticationOptions _options;
@@ -24,13 +16,6 @@ namespace Klootzakken.Client.Domain
             _options = options;
         }
 
-        public Task<string> GetBearerTokenAsync(string temporaryToken)
-        {
-            string urlForTemporaryTokenForAuth = _options.BaseUri + "token";
-
-            return HttpGetFromWebApi(urlForTemporaryTokenForAuth, "access_token", (client) => setBearerAuthenticationParameterForClient(client, "temp"));
-        }
-
         public Task<string> GetPinAsync()
         {
             string urlToCreatePin = _options.BaseUri + "pin/create/";
@@ -38,14 +23,21 @@ namespace Klootzakken.Client.Domain
             return HttpGetFromWebApi(urlToCreatePin, "pin", NoActionForSettingBearerToken());
         }
 
-        public Task<string> GetTemporaryAuthToken(string pin)
+        public Task<string> GetTemporaryAuthTokenAsync(string pin)
         {
             string urlForTemporaryTokenForAuth = _options.BaseUri + "pin/" + pin + "/token";
 
             return HttpGetFromWebApi(urlForTemporaryTokenForAuth, "access_token", NoActionForSettingBearerToken());
         }
 
-        public static async Task<string> HttpGetFromWebApi(string url, string resultJsonStringParameterName, SetBearerTokenAction setBearerTokenAction)
+        public Task<string> GetBearerTokenAsync(string temporaryToken)
+        {
+            string urlForTemporaryTokenForAuth = _options.BaseUri + "token";
+
+            return HttpGetFromWebApi(urlForTemporaryTokenForAuth, "access_token", (client) => setBearerAuthenticationParameterForClient(client, "temp"));
+        }
+
+        private static async Task<string> HttpGetFromWebApi(string url, string resultJsonStringParameterName, SetBearerTokenAction setBearerTokenAction)
         {
             string resultJsonParameterValue = "";
 
@@ -53,15 +45,22 @@ namespace Klootzakken.Client.Domain
             {
                 setBearerTokenAction.Invoke(client);
                 var response = await client.GetAsync(url);
+
                 var resultJson = await response.Content.ReadAsStringAsync();
 
-                resultJsonParameterValue = JsonStringParser.GetValue(resultJsonStringParameterName, resultJson);
-                //TODO: handle error
+                if (response.IsSuccessStatusCode)
+                {
+                    resultJsonParameterValue = JsonStringParser.GetValue(resultJsonStringParameterName, resultJson);
+                }
+                else
+                {
+                    throw new PinAuthenticationException(response.StatusCode.ToString()); //TODO: map from status code to the error
+                }
             }
             return resultJsonParameterValue;
         }
 
-        public delegate void SetBearerTokenAction(HttpClient client);
+        private delegate void SetBearerTokenAction(HttpClient client);
 
         private static SetBearerTokenAction NoActionForSettingBearerToken()
         {
