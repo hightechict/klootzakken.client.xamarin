@@ -29,9 +29,10 @@ namespace Klootzakken.Client.Test.App
 
             var mockedApiClient = new Mock<IApiClient>();
             mockedApiClient.Setup(client => client.GetAsync<List<LobbyView>>(It.IsAny<string>())).ReturnsAsync(expectedLobbies);
+            var sut = new LobbyStatusService(mockedApiClient.Object);
 
             //ACT
-            var lobbies = new LobbyStatusService(mockedApiClient.Object).GetLobbies().Result;
+            var lobbies = sut.GetLobbies().Result;
 
             //ASSERT
             lobbies.Should().BeAssignableTo<List<LobbyView>>();
@@ -50,9 +51,10 @@ namespace Klootzakken.Client.Test.App
                     };
             var mockedApiClient = new Mock<IApiClient>();
             mockedApiClient.Setup(client => client.GetAsync<List<LobbyView>>(It.IsAny<string>())).ReturnsAsync(expectedLobbies);
+            var sut = new LobbyStatusService(mockedApiClient.Object);
 
             //ACT
-            var lobbies = new LobbyStatusService(mockedApiClient.Object).GetMyLobbies().Result;
+            var lobbies = sut.GetMyLobbies().Result;
 
             //ASSERT
             lobbies.Should().BeAssignableTo<List<LobbyView>>();
@@ -71,9 +73,10 @@ namespace Klootzakken.Client.Test.App
                     };
             var mockedApiClient = new Mock<IApiClient>();
             mockedApiClient.Setup(client => client.GetAsync<List<LobbyView>>(It.IsAny<string>())).ReturnsAsync(expectedGames);
+            var sut = new LobbyStatusService(mockedApiClient.Object);
 
             //ACT
-            var myGames = new LobbyStatusService(mockedApiClient.Object).GetMyGames().Result;
+            var myGames = sut.GetMyGames().Result;
 
             //ASSERT
             myGames.Should().BeAssignableTo<List<LobbyView>>();
