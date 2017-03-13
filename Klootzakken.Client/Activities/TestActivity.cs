@@ -13,6 +13,8 @@ using KlootzakkenClient.cs.Services;
 using KlootzakkenClient;
 using IO.Swagger.Model;
 using System.Threading.Tasks;
+using Klootzakken.Client.Resources.Services;
+using Klootzakken.Client.App.Interfaces;
 
 namespace Klootzakken.Client.Activities
 {
@@ -54,7 +56,7 @@ namespace Klootzakken.Client.Activities
             Button createGame = FindViewById<Button>(Resource.Id.btnCreateGame);
             createGame.Click += delegate
             {
-                StartActivity(typeof(MainActivity)); 
+                StartActivity(typeof(MainActivity));
             };
         }
     }
