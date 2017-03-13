@@ -15,10 +15,10 @@ namespace Klootzakken.Client.Domain
 {
     public interface IAuthenticationService //TODO: remove it from the client and solve it ....later issue...
     {
+        //expose - it can be called by someone else
         Task<string> GetPinAsync();
 
-        Task<string> GetTemporaryAuthToken(string pin);
-        //expose - it can be called by someone else
+        Task<string> GetTemporaryAuthTokenAsync(string pin);
 
         Task<string> GetBearerTokenAsync(string temporaruAuthToken);
     }
