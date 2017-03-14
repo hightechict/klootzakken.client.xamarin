@@ -56,6 +56,7 @@
     <Reference Include="Lidgren.Network, Version=2012.1.7.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\CocosSharp.1.7.1.0\lib\MonoAndroid10\Lidgren.Network.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="ModernHttpClient, Version=2.4.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\modernhttpclient.2.4.2\lib\MonoAndroid\ModernHttpClient.dll</HintPath>
     </Reference>
@@ -64,8 +65,8 @@
       <HintPath>..\packages\CocosSharp.1.7.1.0\lib\MonoAndroid10\MonoGame.Framework.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib" />
-    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\portable-net45+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.1-beta1\lib\netstandard1.1\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="OkHttp, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\modernhttpclient.2.4.2\lib\MonoAndroid\OkHttp.dll</HintPath>
@@ -77,9 +78,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.IO.Compression" />
     <Reference Include="System.Net.Http" />
-    <Reference Include="System.Runtime.Loader, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Runtime.Loader.4.0.0\lib\netstandard1.5\System.Runtime.Loader.dll</HintPath>
-    </Reference>
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Xml" />
     <Reference Include="xunit.abstractions, Version=2.0.0.0, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
@@ -97,9 +96,25 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Activities\MainMenuActivity.cs" />
+    <Compile Include="Activities\TestActivity.cs" />
+    <Compile Include="App\Authentication\AuthenticationController.cs" />
+    <Compile Include="App\Authentication\AuthenticationStatusCode.cs" />
+    <Compile Include="App\Authentication\PinAuthenticationException.cs" />
+    <Compile Include="App\Interfaces\ILobbyStatusService.cs" />
+    <Compile Include="App\GameApiService\LobbyStatusService.cs" />
+    <Compile Include="Data\ApiClientOptions.cs" />
+    <Compile Include="Data\DefaultApiClient.cs" />
+    <Compile Include="Data\Interfaces\IApiClient.cs" />
+    <Compile Include="App\Authentication\AuthenticationOptions.cs" />
+    <Compile Include="App\Authentication\AuthenticationService.cs" />
+    <Compile Include="App\Interfaces\IAuthenticationService.cs" />
+    <Compile Include="Domain\Interfaces\ILobbiesRepository.cs" />
+    <Compile Include="Domain\LobbiesRepository.cs" />
     <Compile Include="Services\WebApiGetService.cs" />
     <Compile Include="Activities\MainActivity.cs" />
+    <Compile Include="Services\WebApiLoginService.cs" />
     <Compile Include="Services\WebApiPostService.cs" />
+    <Compile Include="Utils\JsonStringParser.cs" />
     <Compile Include="Utils\KeyValuePairCreator.cs" />
     <Compile Include="Utils\RequestVerificationTokenGetter.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
