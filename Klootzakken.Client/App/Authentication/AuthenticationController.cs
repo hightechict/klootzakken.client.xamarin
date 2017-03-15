@@ -19,7 +19,7 @@ namespace Klootzakken.Client.App.Authentication
             return await _authenticationService.GetPinAsync();
         }
 
-        public async Task<string> pollingForTemporaryAuthToken(string pinCode, int totalNumberOfAttempts, int delayBetweenEachPollingInMillisec) //TODO: get vars from options or config
+        public async Task<string> pollingForTemporaryAuthToken(string pinCode, int totalNumberOfAttempts, int delayBetweenEachPollingInMilisec) //TODO: get vars from options or config
         {
             var numberOfAttempts = 0;
             while (true)
@@ -33,10 +33,15 @@ namespace Klootzakken.Client.App.Authentication
                     numberOfAttempts++;
                     if (numberOfAttempts >= totalNumberOfAttempts)
                         throw; //TODO: do we want to return?
-                    Thread.Sleep(delayBetweenEachPollingInMillisec);
+                    Thread.Sleep(delayBetweenEachPollingInMilisec);
                     Console.WriteLine(ex); //TODO: write error to an error blok
                 }
             }
+        }
+
+        public async Task<string> GetBearerAuthToken(string tempAuthToken)
+        {
+            return await _authenticationService.GetBearerTokenAsync(tempAuthToken);
         }
     }
 }

@@ -12,7 +12,7 @@ namespace Klootzakken.Client.Test.App.Authentication
     public class AuthenticationControllerTest
     {
         private const string _pinCode = "9129";
-        private const string _expectedTempAuthToken = "temporaryAuthToken123456789";
+        private const string _expectedAuthToken = "temporaryAuthToken123456789";
 
         private readonly PinAuthenticationException exepctedPinAuthenticationException = new PinAuthenticationException("404");
 
@@ -55,7 +55,7 @@ namespace Klootzakken.Client.Test.App.Authentication
         {
             //ARRANGE
             var mockedAuthenticationService = new Mock<IAuthenticationService>();
-            mockedAuthenticationService.Setup(auth => auth.GetTemporaryAuthTokenAsync(It.IsAny<string>())).ReturnsAsync(_expectedTempAuthToken);
+            mockedAuthenticationService.Setup(auth => auth.GetTemporaryAuthTokenAsync(It.IsAny<string>())).ReturnsAsync(_expectedAuthToken);
 
             var sut = new AuthenticationController(mockedAuthenticationService.Object);
 
@@ -64,7 +64,7 @@ namespace Klootzakken.Client.Test.App.Authentication
 
             //ASSERT
             tempAuthToken.Should().BeAssignableTo<string>().And
-                .BeSameAs(_expectedTempAuthToken);
+                .BeSameAs(_expectedAuthToken);
         }
 
         [Fact]
@@ -74,7 +74,7 @@ namespace Klootzakken.Client.Test.App.Authentication
             var mockedAuthenticationService = new Mock<IAuthenticationService>();
             mockedAuthenticationService.SetupSequence(auth => auth.GetTemporaryAuthTokenAsync(It.IsAny<string>()))
                 .Throws(exepctedPinAuthenticationException)
-                .ReturnsAsync(_expectedTempAuthToken);
+                .ReturnsAsync(_expectedAuthToken);
 
             var sut = new AuthenticationController(mockedAuthenticationService.Object);
 
@@ -83,7 +83,7 @@ namespace Klootzakken.Client.Test.App.Authentication
 
             //ASSERT
             tempAuthToken.Should().BeAssignableTo<string>().And
-                  .BeSameAs(_expectedTempAuthToken);
+                  .BeSameAs(_expectedAuthToken);
         }
 
         [Fact]
@@ -103,6 +103,24 @@ namespace Klootzakken.Client.Test.App.Authentication
 
             //ASSERT
             pollForTemporaryAuthTokenFunction.ShouldThrow<PinAuthenticationException>();
+            //TODO: return another exception
+        }
+
+        [Fact]
+        public void authenticationController_getBearerAuthToken_returnsBearerAuthToken()
+        {
+            //ARRANGE
+            var mockedAuthenticationService = new Mock<IAuthenticationService>();
+            mockedAuthenticationService.SetupSequence(auth => auth.GetBearerTokenAsync(It.IsAny<string>())).ReturnsAsync(_expectedAuthToken);
+
+            var sut = new AuthenticationController(mockedAuthenticationService.Object);
+
+            //ACT
+            var bearerToken = sut.GetBearerAuthToken(It.IsAny<string>()).Result;
+
+            //ASSERT
+            bearerToken.Should().BeAssignableTo<string>().And
+                .BeSameAs(_expectedAuthToken);
         }
     }
 }
