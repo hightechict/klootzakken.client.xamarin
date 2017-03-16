@@ -17,14 +17,14 @@ namespace Klootzakken.Client.App.Interfaces
 {
     public interface ILobbyStatusService
     {
-        Task<List<LobbyView>> GetLobbies();
+        Task<List<LobbyView>> GetLobbiesAsync();
 
-        Task<List<LobbyView>> GetMyLobbies();
+        Task<List<LobbyView>> GetMyLobbiesAsync();
 
-        Task<List<LobbyView>> GetMyGames();
+        Task<List<LobbyView>> GetMyGamesAsync();
 
-        Task<LobbyView> GetLobbyState(string lobbyId);
+        Task<LobbyView> GetLobbyStateAsync(string lobbyId);
 
-        Task<GameView> GetGameState(string gameId);
+        Task<GameView> GetGameStateAsync(string gameId);
     }
 }
