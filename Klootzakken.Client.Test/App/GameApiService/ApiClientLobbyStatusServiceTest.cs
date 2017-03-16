@@ -37,6 +37,7 @@ namespace Klootzakken.Client.Test.App
             //ASSERT
             lobbies.Should().BeAssignableTo<List<LobbyView>>();
             Assert.Equal(lobbies, expectedLobbies);
+            //TODO: tests for throwing exception
         }
 
         [Fact]

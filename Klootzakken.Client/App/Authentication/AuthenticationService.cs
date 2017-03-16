@@ -6,7 +6,6 @@ using Klootzakken.Client.App.Authentication;
 
 namespace Klootzakken.Client.Domain
 {
-    //TODO: test it ook somehow
     public class AuthenticationService : IAuthenticationService
     {
         private AuthenticationOptions _options;
@@ -34,7 +33,7 @@ namespace Klootzakken.Client.Domain
         {
             string urlForTemporaryTokenForAuth = _options.BaseUri + "token";
 
-            return HttpGetFromWebApi(urlForTemporaryTokenForAuth, "access_token", (client) => setBearerAuthenticationParameterForClient(client, "temp"));
+            return HttpGetFromWebApi(urlForTemporaryTokenForAuth, "access_token", (client) => setBearerAuthenticationParameterForClient(client, temporaryToken));
         }
 
         private static async Task<string> HttpGetFromWebApi(string url, string resultJsonStringParameterName, SetBearerTokenAction setBearerTokenAction)
@@ -55,6 +54,7 @@ namespace Klootzakken.Client.Domain
                 else
                 {
                     throw new PinAuthenticationException(response.StatusCode.ToString()); //TODO: map from status code to the error
+                   //TODO: make and use service exception                                                                 
                 }
             }
             return resultJsonParameterValue;
