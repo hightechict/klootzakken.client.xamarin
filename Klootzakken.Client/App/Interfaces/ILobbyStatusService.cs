@@ -22,5 +22,9 @@ namespace Klootzakken.Client.App.Interfaces
         Task<List<LobbyView>> GetMyLobbies();
 
         Task<List<LobbyView>> GetMyGames();
+
+        Task<LobbyView> GetLobbyState(string lobbyId);
+
+        Task<GameView> GetGameState(string gameId);
     }
 }
