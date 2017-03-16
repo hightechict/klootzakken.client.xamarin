@@ -52,8 +52,6 @@ namespace Klootzakken.Client.Activities
             var justJoinedMyLobby = myLobbyies.Find(l => l.Name.Equals(randomString));
             var gameIsStarted = await lobbyActionService.StartGameForLobbyAsync(createdLobby.Id);
 
-            //var status = lobbyState.Status.ToString();
-
             myGamesListView = FindViewById<ListView>(Resource.Id.myGamesListView);
             myGames = new List<string>
             {
