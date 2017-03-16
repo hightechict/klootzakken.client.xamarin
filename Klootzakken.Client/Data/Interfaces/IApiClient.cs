@@ -10,13 +10,14 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using System.Threading.Tasks;
+using System.Net.Http;
 
 namespace Klootzakken.Client.Data
 {
     public interface IApiClient
     {
         Task<T> GetAsync<T>(string path);
-        Task PostAsync();
+        Task<bool> PostAsync(string path, StringContent postParameters);
         Task PutAsync();
         Task DeleteAsync(); //NOTE: ALWAYS ASYNC IN CASE OF DBs and APIs (INPUT AND OUTPUT OPERATIONS)
     }
