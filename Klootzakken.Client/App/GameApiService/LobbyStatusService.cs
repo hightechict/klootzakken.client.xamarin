@@ -31,5 +31,15 @@ namespace Klootzakken.Client.App
         {
             return _apiCLient.GetAsync<List<LobbyView>>("myLobbies");
         }
+
+        public Task<LobbyView> GetLobbyState(string lobbyId)
+        {
+           return _apiCLient.GetAsync<LobbyView>($"lobby/{lobbyId}");
+        }
+
+        public Task<GameView> GetGameState(string gameId)
+        {
+            return _apiCLient.GetAsync<GameView>($"game/{gameId}");
+        }
     }
 }
