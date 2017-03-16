@@ -23,8 +23,8 @@ namespace Klootzakken.Client.Data
 
         public DefaultApiClient(IAuthenticationService authenticationService, ApiClientOptions options)
         {
-            _options = options;
             _authenticationService = authenticationService;
+            _options = options;
         }
 
         public Task DeleteAsync()
