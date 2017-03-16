@@ -11,33 +11,33 @@ namespace Klootzakken.Client.App
     {
         private IApiClient _apiCLient;
 
-        public LobbyStatusService(IApiClient apiCLient) //
+        public LobbyStatusService(IApiClient apiCLient)
         {
             _apiCLient = apiCLient;
         }
 
         //SOLID!!!! LEARN IT! This is the I, because of Interface segregation (aggregation is the opposite of segregation) -> u depend on IFs ipv. implementations
-        public Task<List<LobbyView>> GetLobbies() // myLobbies, lobbies, myGames
+        public Task<List<LobbyView>> GetLobbiesAsync() // myLobbies, lobbies, myGames
         {
             return _apiCLient.GetAsync<List<LobbyView>>("lobbies");
         }
 
-        public Task<List<LobbyView>> GetMyGames()
+        public Task<List<LobbyView>> GetMyGamesAsync()
         {
             return _apiCLient.GetAsync<List<LobbyView>>("myGames");
         }
 
-        public Task<List<LobbyView>> GetMyLobbies()
+        public Task<List<LobbyView>> GetMyLobbiesAsync()
         {
             return _apiCLient.GetAsync<List<LobbyView>>("myLobbies");
         }
 
-        public Task<LobbyView> GetLobbyState(string lobbyId)
+        public Task<LobbyView> GetLobbyStateAsync(string lobbyId)
         {
            return _apiCLient.GetAsync<LobbyView>($"lobby/{lobbyId}");
         }
 
-        public Task<GameView> GetGameState(string gameId)
+        public Task<GameView> GetGameStateAsync(string gameId)
         {
             return _apiCLient.GetAsync<GameView>($"game/{gameId}");
         }
