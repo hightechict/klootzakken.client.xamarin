@@ -32,7 +32,7 @@ namespace Klootzakken.Client.Test.App
             var sut = new LobbyStatusService(mockedApiClient.Object);
 
             //ACT
-            var lobbies = sut.GetLobbies().Result;
+            var lobbies = sut.GetLobbiesAsync().Result;
 
             //ASSERT
             lobbies.Should().BeAssignableTo<List<LobbyView>>();
@@ -54,7 +54,7 @@ namespace Klootzakken.Client.Test.App
             var sut = new LobbyStatusService(mockedApiClient.Object);
 
             //ACT
-            var lobbies = sut.GetMyLobbies().Result;
+            var lobbies = sut.GetMyLobbiesAsync().Result;
 
             //ASSERT
             lobbies.Should().BeAssignableTo<List<LobbyView>>();
@@ -76,7 +76,7 @@ namespace Klootzakken.Client.Test.App
             var sut = new LobbyStatusService(mockedApiClient.Object);
 
             //ACT
-            var myGames = sut.GetMyGames().Result;
+            var myGames = sut.GetMyGamesAsync().Result;
 
             //ASSERT
             myGames.Should().BeAssignableTo<List<LobbyView>>();
