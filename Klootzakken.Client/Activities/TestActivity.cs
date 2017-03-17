@@ -34,6 +34,7 @@ namespace Klootzakken.Client.Activities
 
             SetContentView(Resource.Layout.MainMenuView);
 
+            //Arrange
             var authenticationOptions = new AuthenticationOptions() { BaseUri = new Uri("http://10.0.2.2:5000/") };
             var authenticationService = new AuthenticationService(authenticationOptions);
             var apiClientOptions = new ApiClientOptions() { BaseUri = new Uri("http://10.0.2.2:5000/")};
@@ -41,9 +42,9 @@ namespace Klootzakken.Client.Activities
             var lobbyStatusService = new LobbyStatusService(apiClient);
             var lobbyActionService = new LobbyActionService(apiClient);
 
-            var lobbies2 = await lobbyStatusService.GetLobbiesAsync();
-
+            //Act
             string randomString  = Guid.NewGuid().ToString("n").Substring(0, 8);
+
             var isCreateGameSucces = await lobbyActionService.CreateLobbyAsync(randomString);
             var lobbies = await lobbyStatusService.GetLobbiesAsync();
             var createdLobby = lobbies.Find(l => l.Name.Equals(randomString));
@@ -52,7 +53,7 @@ namespace Klootzakken.Client.Activities
             var justJoinedMyLobby = myLobbyies.Find(l => l.Name.Equals(randomString));
             var gameIsStarted = await lobbyActionService.StartGameForLobbyAsync(createdLobby.Id);
 
-            myGamesListView = FindViewById<ListView>(Resource.Id.myGamesListView);
+            //Assert
             myGames = new List<string>
             {
                 "GetLobbiesAsync() - " + randomString.Equals(createdLobby.Name).ToString(),
@@ -61,6 +62,7 @@ namespace Klootzakken.Client.Activities
                 "JoinLobbyAsync() - " + joinedToLobby.ToString(),
                 "StartGameForLobbyAsync() - " + gameIsStarted.ToString()
             };
+            myGamesListView = FindViewById<ListView>(Resource.Id.myGamesListView);
             myGamesListView.Adapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, myGames);
 
             Button createGame = FindViewById<Button>(Resource.Id.btnCreateGame);
