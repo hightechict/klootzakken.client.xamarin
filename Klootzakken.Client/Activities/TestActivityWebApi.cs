@@ -1,26 +1,11 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 using Android.App;
-using Android.Content;
 using Android.OS;
-using Android.Runtime;
-using Android.Views;
 using Android.Widget;
-using KlootzakkenClient.cs.Services;
-using KlootzakkenClient;
-using IO.Swagger.Model;
-using System.Threading.Tasks;
-using Klootzakken.Client.Resources.Services;
-using Klootzakken.Client.App.Interfaces;
-using Klootzakken.Client.Data;
 using Klootzakken.Client.Domain;
-using Klootzakken.Client.App;
-using Klootzakken.Client.App.GameApiService;
 using Klootzakken.Client.App.Authentication;
-using System.Threading;
 
 namespace Klootzakken.Client.Activities
 {
@@ -47,7 +32,7 @@ namespace Klootzakken.Client.Activities
             var tempAuthToken = await authenticationController.pollingForTemporaryAuthToken(pinCode, 5, 5000);
             var bearerToken = await authenticationController.GetBearerAuthToken(tempAuthToken);
 
-            //Assert
+            //assert
             authParameters = new List<string>
             {
                 "BearerToken - " + bearerToken

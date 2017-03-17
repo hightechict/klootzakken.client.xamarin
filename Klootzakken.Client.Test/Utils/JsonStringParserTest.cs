@@ -1,5 +1,4 @@
 ﻿using Klootzakken.Client.Utils;
-using Newtonsoft.Json.Linq;
 using Xunit;
 
 namespace Klootzakken.Client.Test.Utils

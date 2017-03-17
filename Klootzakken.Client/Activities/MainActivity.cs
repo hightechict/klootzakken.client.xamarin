@@ -1,8 +1,6 @@
 ﻿using Android.App;
 using Android.Widget;
 using Android.OS;
-using KlootzakkenClient.Activities;
-using Klootzakken.Client;
 using Klootzakken.Client.Activities;
 
 namespace Klootzakken.Client

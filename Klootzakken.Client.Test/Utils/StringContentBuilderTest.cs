@@ -1,5 +1,4 @@
 using Klootzakken.Client.Utils;
-using System.Net.Http;
 using System.Text;
 using Xunit;
 

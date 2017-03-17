@@ -1,20 +1,9 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 using Android.App;
-using Android.Content;
 using Android.OS;
-using Android.Runtime;
-using Android.Views;
 using Android.Widget;
-using KlootzakkenClient.cs.Services;
-using KlootzakkenClient;
-using IO.Swagger.Model;
-using System.Threading.Tasks;
-using Klootzakken.Client.Resources.Services;
-using Klootzakken.Client.App.Interfaces;
 using Klootzakken.Client.Data;
 using Klootzakken.Client.Domain;
 using Klootzakken.Client.App;
