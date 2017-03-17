@@ -7,7 +7,7 @@ using Klootzakken.Client.Data;
 
 namespace Klootzakken.Client.App
 {
-    public class LobbyStatusService : ILobbyStatusService ////if bart tels me , hee u dont have to use api, there is dbfor the enrtys...we do not have to change it, rather make a new implementation of it
+    public class LobbyStatusService : ILobbyStatusService
     {
         private IApiClient _apiCLient;
 
@@ -16,8 +16,7 @@ namespace Klootzakken.Client.App
             _apiCLient = apiCLient;
         }
 
-        //SOLID!!!! LEARN IT! This is the I, because of Interface segregation (aggregation is the opposite of segregation) -> u depend on IFs ipv. implementations
-        public Task<List<LobbyView>> GetLobbiesAsync() // myLobbies, lobbies, myGames
+        public Task<List<LobbyView>> GetLobbiesAsync() 
         {
             return _apiCLient.GetAsync<List<LobbyView>>("lobbies");
         }

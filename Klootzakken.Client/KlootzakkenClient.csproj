@@ -111,11 +111,7 @@
     <Compile Include="App\Authentication\AuthenticationOptions.cs" />
     <Compile Include="App\Authentication\AuthenticationService.cs" />
     <Compile Include="App\Interfaces\IAuthenticationService.cs" />
-    <Compile Include="Domain\Interfaces\ILobbiesRepository.cs" />
-    <Compile Include="Domain\LobbiesRepository.cs" />
-    <Compile Include="Services\WebApiGetService.cs" />
     <Compile Include="Activities\MainActivity.cs" />
-    <Compile Include="Services\WebApiLoginService.cs" />
     <Compile Include="Utils\JsonStringParser.cs" />
     <Compile Include="Utils\KeyValuePairCreator.cs" />
     <Compile Include="Utils\RequestVerificationTokenGetter.cs" />
