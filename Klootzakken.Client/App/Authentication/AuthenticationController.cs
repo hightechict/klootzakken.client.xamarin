@@ -41,7 +41,16 @@ namespace Klootzakken.Client.App.Authentication
 
         public async Task<string> GetBearerAuthToken(string tempAuthToken)
         {
+            try
+            {
             return await _authenticationService.GetBearerTokenAsync(tempAuthToken);
+
+            }
+            catch (Exception e)
+            {
+                Console.Write(e);
+                throw;
+            }
         }
     }
 }

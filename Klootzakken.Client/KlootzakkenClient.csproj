@@ -96,10 +96,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Activities\MainMenuActivity.cs" />
+    <Compile Include="Activities\TestActivityWebApi.cs" />
     <Compile Include="Activities\TestActivity.cs" />
     <Compile Include="App\Authentication\AuthenticationController.cs" />
     <Compile Include="App\Authentication\AuthenticationStatusCode.cs" />
     <Compile Include="App\Authentication\PinAuthenticationException.cs" />
+    <Compile Include="App\GameApiService\LobbyActionService.cs" />
+    <Compile Include="App\Interfaces\ILobbyActionService.cs" />
     <Compile Include="App\Interfaces\ILobbyStatusService.cs" />
     <Compile Include="App\GameApiService\LobbyStatusService.cs" />
     <Compile Include="Data\ApiClientOptions.cs" />
@@ -113,7 +116,6 @@
     <Compile Include="Services\WebApiGetService.cs" />
     <Compile Include="Activities\MainActivity.cs" />
     <Compile Include="Services\WebApiLoginService.cs" />
-    <Compile Include="Services\WebApiPostService.cs" />
     <Compile Include="Utils\JsonStringParser.cs" />
     <Compile Include="Utils\KeyValuePairCreator.cs" />
     <Compile Include="Utils\RequestVerificationTokenGetter.cs" />

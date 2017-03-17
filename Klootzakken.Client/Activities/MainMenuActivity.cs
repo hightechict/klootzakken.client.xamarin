@@ -5,6 +5,9 @@ using Android.OS;
 using Android.Widget;
 using KlootzakkenClient.cs.Services;
 using Klootzakken.Client;
+using System;
+using Klootzakken.Client.Resources.Services;
+using IO.Swagger.Model;
 
 namespace KlootzakkenClient.Activities
 {
@@ -20,20 +23,25 @@ namespace KlootzakkenClient.Activities
             base.OnCreate(savedInstanceState);
 
             SetContentView(Resource.Layout.MainMenuView);
-            var lobbies = await WebApiGetService.GetLobbies();
-            //TODO: catch exception smartly, print error message to the UI
-            var isCreateGameSucces = await WebApiPostService.CreateLobbyAsync("gameDani2");
-            var joinedToLobby = await WebApiPostService.JoinLobby("1");
-            var gameIsStarted = await WebApiPostService.StartGameForLobby("1");
+
+            bool isCreatingLobbySucces = false;
+            List<LobbyView> lobbyViews = null;
+
+            try
+            {
+                isCreatingLobbySucces = await WebApiPostService.CreateLobbyAsync("dani2Lobby");
+                lobbyViews = await WebApiGetService.GetLobbiesAsync();
+
+            }
+            catch (Exception e)
+            {
+                Console.Write(e);
+            }
 
             myGamesListView = FindViewById<ListView>(Resource.Id.myGamesListView);
             myGames = new List<string>
             {
-                lobbies[0].Name,
-                lobbies[3].Name,
-                isCreateGameSucces.ToString(),
-                joinedToLobby.ToString(),
-                gameIsStarted.ToString()
+                isCreatingLobbySucces.ToString()
             };
             myGamesListView.Adapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, myGames);
 

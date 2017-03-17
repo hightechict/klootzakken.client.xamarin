@@ -113,7 +113,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App\ApiClientLobbyStatusServiceTest.cs" />
+    <Compile Include="App\GameApiService\ApiClientLobbyActionServiceTest.cs" />
+    <Compile Include="App\GameApiService\ApiClientLobbyStatusServiceTest.cs" />
     <Compile Include="App\Authentication\AuthenticationControllerTest.cs" />
     <Compile Include="Domain\ApiClientLobbiesRepositoryTest.cs" />
     <Compile Include="Program.cs" />
@@ -152,7 +153,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App\GameApiService\" />
     <Folder Include="JsonFiles\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

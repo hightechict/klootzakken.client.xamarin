@@ -39,11 +39,11 @@ namespace Klootzakken.Client.Activities
             var authenticationOptions = new AuthenticationOptions() { BaseUri = new Uri("http://10.0.2.2:5000/") };
             var authenticationService = new AuthenticationService(authenticationOptions);
 
-            var authorizationController = new AuthenticationController(authenticationService);
+            var authenticationController = new AuthenticationController(authenticationService);
 
-            var pinCode = await authorizationController.GetPinCodeAsync();
-            var tempAuthToken = await authorizationController.pollingForTemporaryAuthToken(pinCode, 5, 5000);
-            var bearerToken = await authorizationController.GetBearerAuthToken(tempAuthToken);
+            var pinCode = await authenticationController.GetPinCodeAsync();
+            var tempAuthToken = await authenticationController.pollingForTemporaryAuthToken(pinCode, 5, 5000);
+            var bearerToken = await authenticationController.GetBearerAuthToken(tempAuthToken);
 
             authParameters = new List<string>
             {

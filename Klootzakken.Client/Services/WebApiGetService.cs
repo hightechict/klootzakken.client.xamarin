@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 
 namespace KlootzakkenClient
 {
-    public static class WebApiGetService
+    public static class WebApiGetService //TODO: REMOVE STATICS
     {
         //TODO: refactor it like in PostService
         public static async Task<List<LobbyView>> GetMyGamesAsync()
@@ -73,7 +73,5 @@ namespace KlootzakkenClient
 
             return state;
         }
-
-
 }
 }

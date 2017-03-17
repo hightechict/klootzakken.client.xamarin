@@ -3,6 +3,7 @@ using Android.Widget;
 using Android.OS;
 using KlootzakkenClient.Activities;
 using Klootzakken.Client;
+using Klootzakken.Client.Activities;
 
 namespace Klootzakken.Client
 {
@@ -18,7 +19,7 @@ namespace Klootzakken.Client
 
             loginButton.Click += delegate
             {
-                StartActivity(typeof(MainMenuActivity));
+                StartActivity(typeof(TestActivityWebApi));
             };
         }
     }
