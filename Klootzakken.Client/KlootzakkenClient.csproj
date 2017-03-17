@@ -96,8 +96,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Activities\MainMenuActivity.cs" />
-    <Compile Include="Activities\TestActivityWebApi.cs" />
     <Compile Include="Activities\TestActivity.cs" />
+    <Compile Include="Activities\TestActivityWebApi.cs" />
     <Compile Include="App\Authentication\AuthenticationController.cs" />
     <Compile Include="App\Authentication\AuthenticationStatusCode.cs" />
     <Compile Include="App\Authentication\PinAuthenticationException.cs" />
