@@ -36,15 +36,18 @@ namespace Klootzakken.Client.Activities
 
             SetContentView(Resource.Layout.MainMenuView);
 
+            //Arrange
             var authenticationOptions = new AuthenticationOptions() { BaseUri = new Uri("http://10.0.2.2:5000/") };
             var authenticationService = new AuthenticationService(authenticationOptions);
 
             var authenticationController = new AuthenticationController(authenticationService);
 
+            //Act
             var pinCode = await authenticationController.GetPinCodeAsync();
             var tempAuthToken = await authenticationController.pollingForTemporaryAuthToken(pinCode, 5, 5000);
             var bearerToken = await authenticationController.GetBearerAuthToken(tempAuthToken);
 
+            //Assert
             authParameters = new List<string>
             {
                 "BearerToken - " + bearerToken
