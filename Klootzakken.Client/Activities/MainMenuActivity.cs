@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using Android.App;
 using Android.OS;
 using Android.Widget;
-using KlootzakkenClient.cs.Services;
 using Klootzakken.Client;
 using System;
-using Klootzakken.Client.Resources.Services;
 using IO.Swagger.Model;
+using Klootzakken.Client.Data;
+using Klootzakken.Client.Domain;
+using Klootzakken.Client.App;
+using Klootzakken.Client.App.GameApiService;
 
 namespace KlootzakkenClient.Activities
 {
@@ -24,13 +26,20 @@ namespace KlootzakkenClient.Activities
 
             SetContentView(Resource.Layout.MainMenuView);
 
+            var authenticationOptions = new AuthenticationOptions() { BaseUri = new Uri("http://10.0.2.2:5000/") };
+            var authenticationService = new AuthenticationService(authenticationOptions);
+            var apiClientOptions = new ApiClientOptions() { BaseUri = new Uri("http://10.0.2.2:5000/") };
+            var apiClient = new DefaultApiClient(authenticationService, apiClientOptions);
+            var lobbyStatusService = new LobbyStatusService(apiClient);
+            var lobbyActionService = new LobbyActionService(apiClient);
+
             bool isCreatingLobbySucces = false;
             List<LobbyView> lobbyViews = null;
 
             try
             {
-                isCreatingLobbySucces = await WebApiPostService.CreateLobbyAsync("dani2Lobby");
-                lobbyViews = await WebApiGetService.GetLobbiesAsync();
+                isCreatingLobbySucces = await lobbyActionService.CreateLobbyAsync("dani2Lobby");
+                lobbyViews = await lobbyStatusService.GetLobbiesAsync();
 
             }
             catch (Exception e)
