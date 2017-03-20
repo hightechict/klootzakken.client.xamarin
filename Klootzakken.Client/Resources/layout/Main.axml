@@ -17,51 +17,10 @@
         android:textSize="24dp"
         android:layout_gravity="center"
         android:layout_margin="20dp" />
-    <EditText
-        android:hint="username"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/username"
-        android:layout_margin="10dp" />
-    <EditText
-        android:hint="password"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/password"
-        android:layout_margin="10dp"
-        android:password="true"
-        android:numeric="integer" />
     <Button
         android:text="Log in"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/btnLogIn"
-        android:layout_margin="20dp" />
-    <TextView
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView3"
-        android:layout_margin="20dp" />
-    <Button
-        android:text="Sign up"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/btnSignIn"
-        android:layout_margin="20dp" />
-    <TextView
-        android:text="or"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView2" />
-    <Button
-        android:text="Log in with Google account"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/btnGoogleLogIn"
         android:layout_margin="20dp" />
 </LinearLayout>
