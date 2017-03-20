@@ -18,8 +18,10 @@ namespace Klootzakken.Client.Data
 {
     public class DefaultApiClient : IApiClient
     {
+        private const string _bearerToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI3YmUyMjI1NS0xMTFkLTQyNjUtYjkzNi0zY2I3NDQ2NWVmZGQiLCJ1bmlxdWVfbmFtZSI6ImRhbmllbC5tb2thQGhpZ2h0ZWNoaWN0Lm5sIiwiQXNwTmV0LklkZW50aXR5LlNlY3VyaXR5U3RhbXAiOiI4YTIyMTcwMC1kYjYzLTRiOWYtYWNiOC1mZTJjMDFiOWZjZmMiLCJuYmYiOjE0OTAwMjkyNzIsImV4cCI6MTQ5MjcwNzY3MiwiaWF0IjoxNDkwMDI5MjcyLCJpc3MiOiJEaXZ2ZXJlbmNlLmNvbSBLbG9vdHpha2tlbiIsImF1ZCI6WyJEZW1vQXVkaWVuY2UiLCJEZW1vQXVkaWVuY2UiXX0._Hxv-wzFP_cI2bHUBmile_aBRZScv9uXcinzTH8l5Eg";
+
         private readonly IAuthenticationService _authenticationService;
-        private readonly ApiClientOptions _options; //use _ for geting rid of "this"
+        private readonly ApiClientOptions _options; 
 
         public DefaultApiClient(IAuthenticationService authenticationService, ApiClientOptions options)
         {
@@ -32,11 +34,10 @@ namespace Klootzakken.Client.Data
             using (var client = new HttpClient())
             {
                 //var bearerToken = await GetTokenIfNotExistingAsync();
-                var bearerToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIwNGIxYmU1NS04MmE5LTRhMTItODMzZC05ZjNlNzZiMTBjMzQiLCJ1bmlxdWVfbmFtZSI6ImRhbmllbC5tb2thQGhpZ2h0ZWNoaWN0Lm5sIiwiQXNwTmV0LklkZW50aXR5LlNlY3VyaXR5U3RhbXAiOiI2MWZkZDExNC0wMzRiLTQ3ZDYtYTk1ZS0wZDQ1YzBjZmYwM2YiLCJuYmYiOjE0ODg2NTkxNDEsImV4cCI6MTQ5MTMzNzU0MSwiaWF0IjoxNDg4NjU5MTQxLCJpc3MiOiJLbG9vdHpha2tlbiBTZXJ2ZXIiLCJhdWQiOlsiQXBpVXNlcnMiLCJBcGlVc2VycyJdfQ.V-D6HQSLYVjNOwakMXlsBAbbExpzGhA_kexQSwGHYZE";
 
                 var uri = new Uri(_options.BaseUri, path); //WHY URI: this will make sure that uri correct
                 var request = new HttpRequestMessage(HttpMethod.Get, uri);
-                request.Headers.Authorization = new AuthenticationHeaderValue("bearer", bearerToken);
+                request.Headers.Authorization = new AuthenticationHeaderValue("bearer", _bearerToken);
 
                 var response = await client.SendAsync(request);
                 var content = await response.Content.ReadAsStringAsync();
@@ -45,9 +46,12 @@ namespace Klootzakken.Client.Data
             }
         }
 
+
+
+
         private Task<string> GetTokenIfNotExistingAsync()
         {    //TODO pass the real token ipv hardcoded one
-            return _authenticationService.GetBearerTokenAsync("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIwNGIxYmU1NS04MmE5LTRhMTItODMzZC05ZjNlNzZiMTBjMzQiLCJ1bmlxdWVfbmFtZSI6ImRhbmllbC5tb2thQGhpZ2h0ZWNoaWN0Lm5sIiwiQXNwTmV0LklkZW50aXR5LlNlY3VyaXR5U3RhbXAiOiI2MWZkZDExNC0wMzRiLTQ3ZDYtYTk1ZS0wZDQ1YzBjZmYwM2YiLCJuYmYiOjE0ODg2NTkxNDEsImV4cCI6MTQ5MTMzNzU0MSwiaWF0IjoxNDg4NjU5MTQxLCJpc3MiOiJLbG9vdHpha2tlbiBTZXJ2ZXIiLCJhdWQiOlsiQXBpVXNlcnMiLCJBcGlVc2VycyJdfQ.V-D6HQSLYVjNOwakMXlsBAbbExpzGhA_kexQSwGHYZE");
+            return _authenticationService.GetBearerTokenAsync("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI3YmUyMjI1NS0xMTFkLTQyNjUtYjkzNi0zY2I3NDQ2NWVmZGQiLCJ1bmlxdWVfbmFtZSI6ImRhbmllbC5tb2thQGhpZ2h0ZWNoaWN0Lm5sIiwiQXNwTmV0LklkZW50aXR5LlNlY3VyaXR5U3RhbXAiOiI4YTIyMTcwMC1kYjYzLTRiOWYtYWNiOC1mZTJjMDFiOWZjZmMiLCJuYmYiOjE0OTAwMjg2NTksImV4cCI6MTQ5MjcwNzA1OSwiaWF0IjoxNDkwMDI4NjU5LCJpc3MiOiJEaXZ2ZXJlbmNlLmNvbSBLbG9vdHpha2tlbiIsImF1ZCI6IkRlbW9BdWRpZW5jZSJ9.wBLQSdLsf49hXN_ocxQsvLssA2koyMlQyUntbysiXCo");
         }
 
         public async Task<bool> PostAsync(string path, StringContent postParameters)
@@ -55,10 +59,9 @@ namespace Klootzakken.Client.Data
             using (var client = new HttpClient())
             {
                 //var bearerToken = await GetTokenIfNotExistingAsync();
-                var bearerToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIwNGIxYmU1NS04MmE5LTRhMTItODMzZC05ZjNlNzZiMTBjMzQiLCJ1bmlxdWVfbmFtZSI6ImRhbmllbC5tb2thQGhpZ2h0ZWNoaWN0Lm5sIiwiQXNwTmV0LklkZW50aXR5LlNlY3VyaXR5U3RhbXAiOiI2MWZkZDExNC0wMzRiLTQ3ZDYtYTk1ZS0wZDQ1YzBjZmYwM2YiLCJuYmYiOjE0ODg2NTkxNDEsImV4cCI6MTQ5MTMzNzU0MSwiaWF0IjoxNDg4NjU5MTQxLCJpc3MiOiJLbG9vdHpha2tlbiBTZXJ2ZXIiLCJhdWQiOlsiQXBpVXNlcnMiLCJBcGlVc2VycyJdfQ.V-D6HQSLYVjNOwakMXlsBAbbExpzGhA_kexQSwGHYZE";
-                var uri = new Uri(_options.BaseUri, path); //TODO: refactor it
-                HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, uri);
-                request.Headers.Authorization = new AuthenticationHeaderValue("bearer", bearerToken);
+                var uri = new Uri(_options.BaseUri, path); //WHY URI: this will make sure that uri correct
+                var request = new HttpRequestMessage(HttpMethod.Post, uri);
+                request.Headers.Authorization = new AuthenticationHeaderValue("bearer", _bearerToken);
                 request.Content = postParameters;
 
                 var response = await client.SendAsync(request);
