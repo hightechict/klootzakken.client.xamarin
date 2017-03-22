@@ -16,7 +16,7 @@ using Klootzakken.Client.App.Interfaces;
 
 namespace Klootzakken.Client.App.Authentication
 {
-    public class TempAuthTokenPoller
+    public class TempAuthTokenPoller : ITempAuthTokenPoller
     {
         private IAuthenticationService _authenticationService;
 
@@ -43,6 +43,5 @@ namespace Klootzakken.Client.App.Authentication
                 }
             }
         }
-
     }
 }
