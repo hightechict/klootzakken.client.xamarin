@@ -22,7 +22,7 @@ namespace Klootzakken.Client.Test.App.Authentication
             var mockedAuthService = new Mock<IAuthenticationService>();
             mockedAuthService.Setup(auth => auth.GetTemporaryAuthTokenAsync(It.IsAny<string>())).Throws(exepctedPinAuthenticationException);
 
-            var sut = new TempAuthenticationTokenPoller(mockedAuthService.Object);
+            var sut = new TempAuthTokenPoller(mockedAuthService.Object);
 
             //ACT
             Func<Task> pollForTemporaryAuthTokenFunction = async () => await sut.poll(_pinCode, 1, 0);
@@ -38,7 +38,7 @@ namespace Klootzakken.Client.Test.App.Authentication
             var mockedAuthenticationService = new Mock<IAuthenticationService>();
             mockedAuthenticationService.Setup(auth => auth.GetTemporaryAuthTokenAsync(It.IsAny<string>())).ReturnsAsync(_tempAuthToken);
 
-            var sut = new TempAuthenticationTokenPoller(mockedAuthenticationService.Object);
+            var sut = new TempAuthTokenPoller(mockedAuthenticationService.Object);
 
             //ACT
             var tempAuthToken = sut.poll(_pinCode, 1, 0).Result;
@@ -57,7 +57,7 @@ namespace Klootzakken.Client.Test.App.Authentication
                 .Throws(exepctedPinAuthenticationException)
                 .ReturnsAsync(_tempAuthToken);
 
-            var sut = new TempAuthenticationTokenPoller(mockedAuthenticationService.Object);
+            var sut = new TempAuthTokenPoller(mockedAuthenticationService.Object);
 
             //ACT
             var tempAuthToken = sut.poll(_pinCode, 2, 0).Result;
@@ -77,7 +77,7 @@ namespace Klootzakken.Client.Test.App.Authentication
                 .Throws(exepctedPinAuthenticationException)
                 .Throws(exepctedPinAuthenticationException);
 
-            var sut = new TempAuthenticationTokenPoller(mockedAuthenticationService.Object);
+            var sut = new TempAuthTokenPoller(mockedAuthenticationService.Object);
 
             //ACT
             Func<Task> pollForTemporaryAuthTokenFunction = async () => await sut.poll(_pinCode, 3, 0);

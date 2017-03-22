@@ -16,11 +16,11 @@ using Klootzakken.Client.App.Interfaces;
 
 namespace Klootzakken.Client.App.Authentication
 {
-    public class TempAuthenticationTokenPoller
+    public class TempAuthTokenPoller
     {
         private IAuthenticationService _authenticationService;
 
-        public TempAuthenticationTokenPoller(IAuthenticationService authenticationService)
+        public TempAuthTokenPoller(IAuthenticationService authenticationService)
         {
             _authenticationService = authenticationService;
         }
