@@ -8,6 +8,7 @@ using GalaSoft.MvvmLight.Ioc;
 using System;
 using Klootzakken.Client.App.Authentication;
 using Android.Content;
+using Klootzakken.Client.Utils;
 
 namespace Klootzakken.Client
 {
@@ -28,16 +29,17 @@ namespace Klootzakken.Client
 
             generatePinButton.Click += async delegate
             {
-                var authenticationController  = ServiceLocator.Current.GetInstance<AuthenticationController>();
+                var authenticationController = ServiceLocator.Current.GetInstance<AuthenticationController>();
                 var pinCode = await authenticationController.GetPinCodeAsync();
 
                 await dialogService.ShowMessage(
                    pinCode,
                     "Pair the following pincode",
                     "Log in",
-                    "Cancel", 
-                    new Action<bool>((isConfirmed) => authenticationController.SaveBearerAuthTokenAsync(pinCode))
-                    );
+                    "Cancel",
+                    new Action<bool>((isConfirmed) => authenticationController.SaveBearerAuthTokenAsync(pinCode)));
+
+                RunOnUiThread(() => Toast.MakeText(this, new SharedPreferenceHandler().GetPreference("bearer_token"), ToastLength.Long).Show());
             };
 
             //nav.NavigateTo(maniMenuPageKey); //TODO: navigate to
