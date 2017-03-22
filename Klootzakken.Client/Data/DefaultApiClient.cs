@@ -46,9 +46,6 @@ namespace Klootzakken.Client.Data
             }
         }
 
-
-
-
         private Task<string> GetTokenIfNotExistingAsync()
         {    //TODO pass the real token ipv hardcoded one
             return _authenticationService.GetBearerTokenAsync("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI3YmUyMjI1NS0xMTFkLTQyNjUtYjkzNi0zY2I3NDQ2NWVmZGQiLCJ1bmlxdWVfbmFtZSI6ImRhbmllbC5tb2thQGhpZ2h0ZWNoaWN0Lm5sIiwiQXNwTmV0LklkZW50aXR5LlNlY3VyaXR5U3RhbXAiOiI4YTIyMTcwMC1kYjYzLTRiOWYtYWNiOC1mZTJjMDFiOWZjZmMiLCJuYmYiOjE0OTAwMjg2NTksImV4cCI6MTQ5MjcwNzA1OSwiaWF0IjoxNDkwMDI4NjU5LCJpc3MiOiJEaXZ2ZXJlbmNlLmNvbSBLbG9vdHpha2tlbiIsImF1ZCI6IkRlbW9BdWRpZW5jZSJ9.wBLQSdLsf49hXN_ocxQsvLssA2koyMlQyUntbysiXCo");
