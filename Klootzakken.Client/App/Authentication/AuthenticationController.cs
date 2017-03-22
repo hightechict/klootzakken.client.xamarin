@@ -15,10 +15,14 @@ namespace Klootzakken.Client.App.Authentication
         private IAuthenticationService _authenticationService;
         private ISharedPreferenceHandler _preferenceHandler;
 
+        private TempAuthenticationTokenPoller _tempAuthenticationTokenPoller;
+
         public AuthenticationController(IAuthenticationService authenticationService, ISharedPreferenceHandler preferenceHandler)
         {
             _authenticationService = authenticationService;
             _preferenceHandler = preferenceHandler;
+
+            _tempAuthenticationTokenPoller = new TempAuthenticationTokenPoller(authenticationService);
         }
 
         public async Task<string> GetPinCodeAsync()
@@ -28,38 +32,19 @@ namespace Klootzakken.Client.App.Authentication
 
         public async void SaveBearerAuthTokenAsync(string pinCode)
         {
-            if (_preferenceHandler.GetPreference(_brearerTokenKeyName) is null)
+            if (_preferenceHandler.GetPreference(_brearerTokenKeyName) is null) //TODO: also handler the situ when the key is expired
             {
                 string bearerToken = await GetBrearerTokenAsync(pinCode);
                 _preferenceHandler.SavePreference("bearer_token", bearerToken);
             }
+
         }
 
         private async Task<string> GetBrearerTokenAsync(string pinCode)
         {
-            var tempToken = await pollingForTemporaryAuthToken(pinCode, 5, 5000);
+            var tempToken = await _tempAuthenticationTokenPoller.poll(pinCode, 5, 5000); 
             var bearerToken = await _authenticationService.GetBearerTokenAsync(tempToken);
             return bearerToken;
         }
-
-        public async Task<string> pollingForTemporaryAuthToken(string pinCode, int totalNumberOfAttempts, int delayBetweenEachPollingInMilisec) //TODO: get vars from options or config
-        {
-            var numberOfAttempts = 0;
-            while (true)
-            {
-                try
-                {
-                    return await _authenticationService.GetTemporaryAuthTokenAsync(pinCode);
-                }
-                catch (PinAuthenticationException ex)
-                {
-                    numberOfAttempts++;
-                    if (numberOfAttempts >= totalNumberOfAttempts)
-                        throw; //TODO: do we want to return?
-                    Thread.Sleep(delayBetweenEachPollingInMilisec);
-                }
-            }
-        }
-
     }
 }
