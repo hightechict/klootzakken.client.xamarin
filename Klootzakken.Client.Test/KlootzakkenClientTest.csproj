@@ -113,6 +113,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App\Authentication\TempAuthTokenPollerTest.cs" />
     <Compile Include="App\GameApiService\ApiClientLobbyActionServiceTest.cs" />
     <Compile Include="App\GameApiService\ApiClientLobbyStatusServiceTest.cs" />
     <Compile Include="App\Authentication\AuthenticationControllerTest.cs" />
