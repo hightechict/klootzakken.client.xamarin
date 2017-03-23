@@ -38,11 +38,9 @@ namespace Klootzakken.Client
                     "Log in",
                     "Cancel",
                     new Action<bool>((isConfirmed) => authenticationController.SaveBearerAuthTokenAsync(pinCode)));
-
-                RunOnUiThread(() => Toast.MakeText(this, new SharedPreferenceHandler().GetPreference("bearer_token"), ToastLength.Long).Show());
             };
 
-            //nav.NavigateTo(maniMenuPageKey); //TODO: navigate to
+            RunOnUiThread(() => Toast.MakeText(this, new SharedPreferenceHandler().GetPreference("bearer_token"), ToastLength.Long).Show());
         }
     }
 }
