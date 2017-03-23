@@ -36,7 +36,8 @@ namespace Klootzakken.Client
 
             var authenticationOptions = new AuthenticationOptions() { BaseUri = new Uri("http://www.glueware.nl/klootzakken/kz/") };
             var authenticationService = new AuthenticationService(authenticationOptions);
-            var authenticationController = new AuthenticationController(authenticationService, new SharedPreferenceHandler());
+            var tempAuthTokenPoller = new TempAuthTokenPoller(authenticationService);
+            var authenticationController = new AuthenticationController(authenticationService, tempAuthTokenPoller, new SharedPreferenceHandler());
             SimpleIoc.Default.Register<AuthenticationController>(() => authenticationController);
 
 
