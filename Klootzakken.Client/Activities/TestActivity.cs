@@ -23,10 +23,12 @@ namespace Klootzakken.Client.Activities
 
             SetContentView(Resource.Layout.MainMenuView);
 
+            System.Threading.ThreadPool.SetMinThreads(30, 30);
+
             //Arrange
-            var authenticationOptions = new AuthenticationOptions() { BaseUri = new Uri("http://10.0.2.2:5000/") };
+            var authenticationOptions = new AuthenticationOptions() { BaseUri = new Uri("http://www.glueware.nl/klootzakken/kz/") };
             var authenticationService = new AuthenticationService(authenticationOptions);
-            var apiClientOptions = new ApiClientOptions() { BaseUri = new Uri("http://10.0.2.2:5000/")};
+            var apiClientOptions = new ApiClientOptions() { BaseUri = new Uri("http://www.glueware.nl/klootzakken/kzapi/") };
             var apiClient = new DefaultApiClient(authenticationService, apiClientOptions);
             var lobbyStatusService = new LobbyStatusService(apiClient);
             var lobbyActionService = new LobbyActionService(apiClient);
@@ -35,6 +37,7 @@ namespace Klootzakken.Client.Activities
             string randomString  = Guid.NewGuid().ToString("n").Substring(0, 8);
 
             var isCreateGameSucces = await lobbyActionService.CreateLobbyAsync(randomString);
+
             var lobbies = await lobbyStatusService.GetLobbiesAsync();
             var createdLobby = lobbies.Find(l => l.Name.Equals(randomString));
             var joinedToLobby = await lobbyActionService.JoinLobbyAsync(createdLobby.Id);

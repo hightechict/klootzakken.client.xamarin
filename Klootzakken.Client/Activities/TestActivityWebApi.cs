@@ -6,6 +6,7 @@ using Android.OS;
 using Android.Widget;
 using Klootzakken.Client.Domain;
 using Klootzakken.Client.App.Authentication;
+using Klootzakken.Client.Utils;
 
 namespace Klootzakken.Client.Activities
 {
@@ -22,22 +23,24 @@ namespace Klootzakken.Client.Activities
             SetContentView(Resource.Layout.MainMenuView);
 
             //Arrange
-            var authenticationOptions = new AuthenticationOptions() { BaseUri = new Uri("http://10.0.2.2:5000/") };
+            var authenticationOptions = new AuthenticationOptions() { BaseUri = new Uri("http://www.glueware.nl/klootzakken/kz/") };
             var authenticationService = new AuthenticationService(authenticationOptions);
+            var tempAuthTokenPoller = new TempAuthTokenPoller(authenticationService);
 
-            var authenticationController = new AuthenticationController(authenticationService);
+            var authenticationController = new AuthenticationController(authenticationService, tempAuthTokenPoller, new SharedPreferenceHandler());
 
             //Act
             var pinCode = await authenticationController.GetPinCodeAsync();
-            var tempAuthToken = await authenticationController.pollingForTemporaryAuthToken(pinCode, 5, 5000);
-            var bearerToken = await authenticationController.GetBearerAuthToken(tempAuthToken);
+            //var tempAuthToken = await authenticationController.pollingForTemporaryAuthToken(pinCode, 5, 5000);
+            //var bearerToken = await authenticationController.SaveBearerAuthTokenAsync(tempAuthToken);
 
-            //assert
-            authParameters = new List<string>
+            //Assert
+            /*authParameters = new List<string>
             {
                 "BearerToken - " + bearerToken
-            };
+            };*/
 
+            authParametersView = FindViewById<ListView>(Resource.Id.myGamesListView);
             authParametersView.Adapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, authParameters);
 
             Button createGame = FindViewById<Button>(Resource.Id.btnCreateGame);
