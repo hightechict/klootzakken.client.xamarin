@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="100"
+    android:minWidth="25px"
+    android:minHeight="25px">
+    <TextView
+        android:text="Authorization"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:id="@+id/textView1"
+        style="bold"
+        android:textSize="24dp"
+        android:layout_gravity="center"
+        android:layout_margin="20dp" />
+    <Button
+        android:text="Generate pincode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/generateNumbers"
+        android:layout_margin="20dp" />
+    <Button
+        android:text="Generate pincode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/generatePin"
+        android:layout_margin="20dp" />
+</LinearLayout>
