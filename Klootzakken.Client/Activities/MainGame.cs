@@ -20,7 +20,7 @@ namespace Klootzakken.Client.Activities
             base.OnCreate(savedInstanceState);
 
             // Create your application here
-            SetContentView(Resource.Layout.GameDeckView);
+            //SetContentView(Resource.Layout.GameDeckView);
             var IApiClient = savedInstanceState ;
 
 

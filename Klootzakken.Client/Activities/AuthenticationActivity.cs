@@ -38,6 +38,8 @@ namespace Klootzakken.Client
                     "Log in",
                     "Cancel",
                     new Action<bool>((isConfirmed) => authenticationController.SaveBearerAuthTokenAsync(pinCode)));
+                //TODO: add false
+                //TODO: add test for services seperately with the live server
             };
 
             RunOnUiThread(() => Toast.MakeText(this, new SharedPreferenceHandler().GetPreference("bearer_token"), ToastLength.Long).Show());

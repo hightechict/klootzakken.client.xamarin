@@ -135,7 +135,7 @@
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\GeneraterdApiEnv\csharp-client-generated\csharp-client\src\IO.Swagger\IO.Swagger.csproj">
+    <ProjectReference Include="..\IO.Swagger\IO.Swagger.csproj">
       <Project>{fe83999d-a31e-4a0e-adad-741486c6c9c4}</Project>
       <Name>IO.Swagger</Name>
     </ProjectReference>

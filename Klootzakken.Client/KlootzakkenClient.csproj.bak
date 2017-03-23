@@ -16,7 +16,7 @@
     <AndroidResgenFile>Resources\Resource.Designer.cs</AndroidResgenFile>
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
     <AndroidUseLatestPlatformSdk>True</AndroidUseLatestPlatformSdk>
-    <TargetFrameworkVersion>v6.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v7.1</TargetFrameworkVersion>
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -152,6 +152,9 @@
     <AndroidResource Include="Resources\layout\MainMenuView.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
+    <AndroidResource Include="Resources\layout\GameDeckView.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
     <AndroidResource Include="Resources\layout\AuthenticationView.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
@@ -175,6 +178,12 @@
     <Analyzer Include="..\packages\Roslynator.Analyzers.1.2.0\analyzers\dotnet\cs\Roslynator.CSharp.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\GeneraterdApiEnv\csharp-client-generated\csharp-client\src\IO.Swagger\IO.Swagger.csproj">
+      <Project>{fe83999d-a31e-4a0e-adad-741486c6c9c4}</Project>
+      <Name>IO.Swagger</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
     <AndroidResource Include="Resources\drawable\king_of_hearts.png" />
   </ItemGroup>
   <ItemGroup>
@@ -182,12 +191,6 @@
     <Folder Include="MVVM\View\" />
     <Folder Include="Resources\layout\pin\" />
     <Folder Include="ViewModel\" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\IO.Swagger\IO.Swagger.csproj">
-      <Project>{fe83999d-a31e-4a0e-adad-741486c6c9c4}</Project>
-      <Name>IO.Swagger</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
