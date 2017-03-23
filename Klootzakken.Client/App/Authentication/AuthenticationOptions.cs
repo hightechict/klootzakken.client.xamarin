@@ -14,6 +14,7 @@ namespace Klootzakken.Client.Domain
 {
     public class AuthenticationOptions //Options patters
     {
-        public Uri BaseUri { get; set; } //it is a property
+        //add other options
+        public Uri BaseUri { get; set; }
     }
 }
