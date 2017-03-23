@@ -129,7 +129,6 @@
     <Compile Include="App\Interfaces\IAuthenticationService.cs" />
     <Compile Include="Activities\MainActivity.cs" />
     <Compile Include="MVVM\ViewModel\AuthenticationViewModel.cs" />
-    <Compile Include="Resources\layout\GamePool.cs" />
     <Compile Include="Utils\HelperElements.cs" />
     <Compile Include="Utils\Interfaces\ISharedPreferenceHandler.cs" />
     <Compile Include="Utils\JsonStringParser.cs" />
@@ -139,7 +138,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\SharedPreferenceHandler.cs" />
     <Compile Include="Utils\StringContentBuilder.cs" />
-    <Compile Include="ViewModel\MainViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="GettingStarted.Xamarin" />
@@ -192,6 +190,7 @@
     <Folder Include="MVVM\Model\" />
     <Folder Include="MVVM\View\" />
     <Folder Include="Resources\layout\pin\" />
+    <Folder Include="ViewModel\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
