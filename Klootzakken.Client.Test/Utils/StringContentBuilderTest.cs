@@ -11,7 +11,7 @@ namespace Klootzakken.Client.Tests
         [Fact]
         public void nullParameter_createStringContent_returnEmptyContent()
         {
-            var stringContent = stringContentBuilder.build();
+            var stringContent = stringContentBuilder.Build();
 
             Assert.Equal(stringContent.Headers.ContentType.CharSet, "utf-8");
             Assert.Equal(stringContent.Headers.ContentType.MediaType, "application/json");
@@ -20,7 +20,7 @@ namespace Klootzakken.Client.Tests
 
         [Fact]
         public void OneKeyValueParameter_CreateStringContent_StringContentIsBuiltUp () {
-            var stringContent = stringContentBuilder.build(KeyValuePairCreator.Create("name", "DanielsLobby"));
+            var stringContent = stringContentBuilder.Build(KeyValuePairCreator.Create("name", "DanielsLobby"));
 
             Assert.Equal(stringContent.Headers.ContentType.CharSet, "utf-8");
             Assert.Equal(stringContent.Headers.ContentType.MediaType, "application/json");
@@ -30,7 +30,7 @@ namespace Klootzakken.Client.Tests
         [Fact]
         public void MultipleKeyValueParameters_CreateStringContent_StringContentIsBuiltUp()
         {
-            var stringContent = stringContentBuilder.build(
+            var stringContent = stringContentBuilder.Build(
                 KeyValuePairCreator.Create("name", "DanielsLobby"),
                 KeyValuePairCreator.Create("id", "DanielsId"));
 
