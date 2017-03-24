@@ -15,7 +15,7 @@ namespace Klootzakken.Client.App
             _apiCLient = apiCLient;
         }
 
-        public Task<List<LobbyView>> GetLobbiesAsync() 
+        public Task<List<LobbyView>> GetLobbiesAsync()
         {
             return _apiCLient.GetAsync<List<LobbyView>>("lobbies");
         }
