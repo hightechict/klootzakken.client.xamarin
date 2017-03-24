@@ -10,6 +10,14 @@
             </SnippetTypes>
         </Header>
         <Snippet>
+           <Imports>
+                <Import>
+                    <Namespace>Xunit</Namespace>
+                </Import>
+               <Import>
+                 <Namespace>FluentAssertions</Namespace>
+               </Import>
+            </Imports>
             <Declarations>
                 <Literal Editable="false">
                     <ID>SystemConsole</ID>
@@ -19,11 +27,11 @@
             <Code Language="csharp"><![CDATA[[Fact]
             public void $end$Test()
             {
-            //ARRANGE
+            //Arrange
             
-            //ACT
+            //Act
             
-            //ASSERT
+            //Assert
             }]]>
             </Code>
         </Snippet>
