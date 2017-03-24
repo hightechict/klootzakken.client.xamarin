@@ -21,21 +21,21 @@ namespace Klootzakken.Client.App.GameApiService
         {
             return await _apiClient.PostAsync(
                 $"lobby/create/{lobbyName}",
-                stringContentBuilder.build(KeyValuePairCreator.Create("name", lobbyName)));
+                stringContentBuilder.Build(KeyValuePairCreator.Create("name", lobbyName)));
         }
 
         public async Task<bool> JoinLobbyAsync(string lobbyId)
         {
             return await _apiClient.PostAsync(
                 $"lobby/{lobbyId}/join",
-                stringContentBuilder.build(KeyValuePairCreator.Create("lobbyId", lobbyId)));
+                stringContentBuilder.Build(KeyValuePairCreator.Create("lobbyId", lobbyId)));
         }
 
         public async Task<bool> StartGameForLobbyAsync(string lobbyId)
         {
             return await _apiClient.PostAsync(
                 $"lobby/{lobbyId}/start",
-                stringContentBuilder.build(KeyValuePairCreator.Create("lobbyId", lobbyId)));
+                stringContentBuilder.Build(KeyValuePairCreator.Create("lobbyId", lobbyId)));
         }
     }
 }

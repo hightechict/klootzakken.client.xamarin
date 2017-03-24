@@ -17,7 +17,7 @@ namespace Klootzakken.Client.Utils
             _mediaType = mediaType;
         }
 
-        public StringContent build(params KeyValuePair<string, string>[] keyValuePairs)
+        public StringContent Build(params KeyValuePair<string, string>[] keyValuePairs)
         {
             return new StringContent(buildContent(keyValuePairs),
                          _charSet,
