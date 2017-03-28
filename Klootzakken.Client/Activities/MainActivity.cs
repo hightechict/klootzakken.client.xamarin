@@ -9,6 +9,8 @@ using Klootzakken.Client.Domain;
 using System;
 using Klootzakken.Client.App.Authentication;
 using Klootzakken.Client.Utils;
+using KlootzakkenClient.Activities;
+using Klootzakken.Client.App.Configurators;
 
 namespace Klootzakken.Client
 {
@@ -26,14 +28,13 @@ namespace Klootzakken.Client
             {
                 ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
-                var nav = new NavigationService();
-                nav.Configure(_authenticationActivityPageKey, typeof(AuthenticationActivity));
-                nav.Configure(_mainMenuActivityPageKey, typeof(MainActivity));
-                SimpleIoc.Default.Register<INavigationService>(() => nav);
+                new NavigationServiceConfigurator().Configure();
 
+                //Add configurator
                 var dialog = new DialogService();
                 SimpleIoc.Default.Register<IDialogService>(() => dialog);
 
+                //TODO: add configuratore
                 var authenticationOptions = new AuthenticationOptions() { BaseUri = new Uri("http://www.glueware.nl/klootzakken/kz/") };
                 var authenticationService = new AuthenticationService(authenticationOptions);
                 var tempAuthTokenPoller = new TempAuthTokenPoller(authenticationService);
