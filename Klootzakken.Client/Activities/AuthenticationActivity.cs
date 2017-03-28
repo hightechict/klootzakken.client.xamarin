@@ -45,7 +45,7 @@ namespace Klootzakken.Client
 
             GeneratePinButton.SetCommand("Click", PinGenerationViewModel.PopUpGeneratedPinAndActions);
 
-            //RunOnUiThread(() => Toast.MakeText(this, new SharedPreferenceHandler().GetPreference("bearer_token"), ToastLength.Long).Show());
+            RunOnUiThread(() => Toast.MakeText(this, new SharedPreferenceHandler().GetPreference("bearer_token"), ToastLength.Long).Show());
         }
     }
 }
