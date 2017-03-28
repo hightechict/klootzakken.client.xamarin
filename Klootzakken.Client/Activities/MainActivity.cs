@@ -41,7 +41,6 @@ namespace Klootzakken.Client
             SimpleIoc.Default.Register<AuthenticationController>(() => authenticationController);
 
 
-
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.Main);
 
@@ -49,7 +48,7 @@ namespace Klootzakken.Client
 
             loginButton.Click += delegate
             {
-                StartActivity(typeof(AuthorizationActivity));
+                StartActivity(typeof(AuthenticationActivity));
             };
             
         }
