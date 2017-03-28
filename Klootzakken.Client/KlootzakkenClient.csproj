@@ -123,6 +123,7 @@
     <Compile Include="App\Authentication\AuthenticationStatusCode.cs" />
     <Compile Include="App\Authentication\PinAuthenticationException.cs" />
     <Compile Include="App\Authentication\TempAuthTokenPoller.cs" />
+    <Compile Include="App\Configurators\NavigationServiceConfigurator.cs" />
     <Compile Include="App\GameApiService\LobbyActionService.cs" />
     <Compile Include="App\Interfaces\ILobbyActionService.cs" />
     <Compile Include="App\Interfaces\ILobbyStatusService.cs" />
@@ -135,7 +136,7 @@
     <Compile Include="App\Authentication\AuthenticationService.cs" />
     <Compile Include="App\Interfaces\IAuthenticationService.cs" />
     <Compile Include="Activities\MainActivity.cs" />
-    <Compile Include="MVVM\ViewModel\AuthenticationViewModel.cs" />
+    <Compile Include="App\MVVM\ViewModel\AuthenticationViewModel.cs" />
     <Compile Include="Utils\HelperElements.cs" />
     <Compile Include="Utils\Interfaces\ISharedPreferenceHandler.cs" />
     <Compile Include="Utils\JsonStringParser.cs" />
@@ -185,9 +186,8 @@
     <AndroidResource Include="Resources\drawable\king_of_hearts.png" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="MVVM\Model\" />
-    <Folder Include="MVVM\View\" />
-    <Folder Include="Resources\layout\pin\" />
+    <Folder Include="App\MVVM\Model\" />
+    <Folder Include="App\MVVM\View\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\IO.Swagger\IO.Swagger.csproj">
