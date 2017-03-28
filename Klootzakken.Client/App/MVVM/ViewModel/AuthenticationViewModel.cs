@@ -11,17 +11,14 @@ namespace Klootzakken.Client.MVVM.ViewModel
     public class PinGenerationViewModel : ViewModelBase
     {
         //relay = közvetit
-        private RelayCommand _popUpGeneratedPinAndActions;
+        private RelayCommand _popUpGeneratedPinAndConfirmActions;
 
-        public RelayCommand PopUpGeneratedPinAndActions
+        public RelayCommand PopUpGeneratedPinAndConfirmActions
         {
-            get
-            {
-                return _popUpGeneratedPinAndActions ?? (_popUpGeneratedPinAndActions = new RelayCommand(createPopUpMessage()));
-            }
+            get { return _popUpGeneratedPinAndConfirmActions ?? (_popUpGeneratedPinAndConfirmActions = new RelayCommand(CreatePopUpMessage())); }
         }
 
-        private static Action createPopUpMessage()
+        private static Action CreatePopUpMessage()
         {
             return async () =>
             {
@@ -34,17 +31,19 @@ namespace Klootzakken.Client.MVVM.ViewModel
                     "Pair the following pincode",
                     "Log in",
                     "Cancel",
-                    saveBearerTokenAfterConfirmation(authenticationController, pinCode));
+                    SaveBearerTokenAfterConfirmation(authenticationController, pinCode));
             };
         }
 
-        private static Action<bool> saveBearerTokenAfterConfirmation(AuthenticationController authenticationController, string pinCode)
+        private static Action<bool> SaveBearerTokenAfterConfirmation(AuthenticationController authenticationController, string pinCode)
         {
             return new Action<bool>((isConfirmed) =>
             {
                 if (isConfirmed)
                 {
                     authenticationController.SaveBearerAuthTokenAsync(pinCode);
+                    var navigationService = ServiceLocator.Current.GetInstance<INavigationService>();
+                    navigationService.NavigateTo(_mainMenuActivityPageKey);
                 }
             });
         }
