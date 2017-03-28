@@ -14,25 +14,17 @@ namespace Klootzakken.Client
     [Activity(Label = "KlootzakkenClient", MainLauncher = false, Icon = "@drawable/icon")]
     public class AuthenticationActivity : ActivityBase
     {
-        public const string maniMenuPageKey = "MainMenuActivity";
-
         private PinGenerationViewModel _pinGenerationViewModel;
         private Button _generatePinBtn;
 
         public PinGenerationViewModel PinGenerationViewModel
         {
-            get
-            {
-                return _pinGenerationViewModel ?? (_pinGenerationViewModel = new PinGenerationViewModel());
-            }
+            get { return _pinGenerationViewModel ?? (_pinGenerationViewModel = new PinGenerationViewModel()); }
         }
 
         public Button GeneratePinButton
         {
-            get
-            {
-                return _generatePinBtn ?? (_generatePinBtn = FindViewById<Button>(Resource.Id.generatePin));
-            }
+            get { return _generatePinBtn ?? (_generatePinBtn = FindViewById<Button>(Resource.Id.generatePin)); }
         }
 
         protected override void OnCreate(Bundle bundle)
@@ -43,7 +35,7 @@ namespace Klootzakken.Client
             var dialogService = ServiceLocator.Current.GetInstance<IDialogService>();
             var nav = ServiceLocator.Current.GetInstance<INavigationService>();
 
-            GeneratePinButton.SetCommand("Click", PinGenerationViewModel.PopUpGeneratedPinAndActions);
+            GeneratePinButton.SetCommand("Click", PinGenerationViewModel.PopUpGeneratedPinAndConfirmActions);
 
             RunOnUiThread(() => Toast.MakeText(this, new SharedPreferenceHandler().GetPreference("bearer_token"), ToastLength.Long).Show());
         }
