@@ -17,28 +17,36 @@ namespace Klootzakken.Client.MVVM.ViewModel
         {
             get
             {
-                return _popUpGeneratedPinAndActions
-                    ?? (_popUpGeneratedPinAndActions = new RelayCommand(
-                    async () =>
-                    {
-                        var dialogService = ServiceLocator.Current.GetInstance<IDialogService>();
-                        var authenticationController = ServiceLocator.Current.GetInstance<AuthenticationController>();
-                        var pinCode = await authenticationController.GetPinCodeAsync();
-
-                        await dialogService.ShowMessage(
-                           pinCode,
-                            "Pair the following pincode",
-                            "Log in",
-                            "Cancel",
-                            new Action<bool>((isConfirmed) =>
-                            {
-                                if (isConfirmed) {
-                                    authenticationController.SaveBearerAuthTokenAsync(pinCode);
-                                }
-                            }
-                            ));
-                    }));
+                return _popUpGeneratedPinAndActions ?? (_popUpGeneratedPinAndActions = new RelayCommand(createPopUpMessage()));
             }
+        }
+
+        private static Action createPopUpMessage()
+        {
+            return async () =>
+            {
+                var dialogService = ServiceLocator.Current.GetInstance<IDialogService>();
+                var authenticationController = ServiceLocator.Current.GetInstance<AuthenticationController>();
+                var pinCode = await authenticationController.GetPinCodeAsync();
+
+                await dialogService.ShowMessage(
+                   pinCode,
+                    "Pair the following pincode",
+                    "Log in",
+                    "Cancel",
+                    saveBearerTokenAfterConfirmation(authenticationController, pinCode));
+            };
+        }
+
+        private static Action<bool> saveBearerTokenAfterConfirmation(AuthenticationController authenticationController, string pinCode)
+        {
+            return new Action<bool>((isConfirmed) =>
+            {
+                if (isConfirmed)
+                {
+                    authenticationController.SaveBearerAuthTokenAsync(pinCode);
+                }
+            });
         }
     }
 }
