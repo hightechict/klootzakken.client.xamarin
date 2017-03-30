@@ -6,8 +6,8 @@ namespace Klootzakken.Client.App.Configurators
 {
     public class NavigationServiceConfigurator
     {
-        private const string _authenticationActivityPageKey = "AuthenticationActivity";
-        private const string _mainMenuActivityPageKey = "MainMenuActivity";
+        public const string _authenticationActivityPageKey = "AuthenticationActivity";
+        public const string _mainMenuActivityPageKey = "MainMenuActivity";
 
         public void Configure()
         {

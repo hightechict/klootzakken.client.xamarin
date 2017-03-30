@@ -123,6 +123,8 @@
     <Compile Include="App\Authentication\AuthenticationStatusCode.cs" />
     <Compile Include="App\Authentication\PinAuthenticationException.cs" />
     <Compile Include="App\Authentication\TempAuthTokenPoller.cs" />
+    <Compile Include="App\Configurators\AuthenticationControllerConfigurator.cs" />
+    <Compile Include="App\Configurators\DialogServiceConfigurator.cs" />
     <Compile Include="App\Configurators\NavigationServiceConfigurator.cs" />
     <Compile Include="App\GameApiService\LobbyActionService.cs" />
     <Compile Include="App\Interfaces\ILobbyActionService.cs" />

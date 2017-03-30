@@ -16,13 +16,12 @@ namespace Klootzakken.Client.Activities
     public class MainGame : Activity
     {
         protected override void OnCreate(Bundle savedInstanceState)
-        {
+        {   
             base.OnCreate(savedInstanceState);
 
             // Create your application here
             //SetContentView(Resource.Layout.GameDeckView);
             var IApiClient = savedInstanceState ;
-
 
             /*
             button.Click += delegate

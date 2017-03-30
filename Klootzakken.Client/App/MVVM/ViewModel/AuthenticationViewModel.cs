@@ -3,6 +3,7 @@ using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using GalaSoft.MvvmLight.Views;
 using Klootzakken.Client.App.Authentication;
+using Klootzakken.Client.App.Configurators;
 using Microsoft.Practices.ServiceLocation;
 using System;
 
@@ -43,7 +44,7 @@ namespace Klootzakken.Client.MVVM.ViewModel
                 {
                     authenticationController.SaveBearerAuthTokenAsync(pinCode);
                     var navigationService = ServiceLocator.Current.GetInstance<INavigationService>();
-                    navigationService.NavigateTo(_mainMenuActivityPageKey);
+                    navigationService.NavigateTo(NavigationServiceConfigurator._mainMenuActivityPageKey);
                 }
             });
         }

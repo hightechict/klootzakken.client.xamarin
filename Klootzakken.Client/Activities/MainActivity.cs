@@ -19,9 +19,6 @@ namespace Klootzakken.Client
     {
         private static bool _iocContainerInitialized;
 
-        private const string _authenticationActivityPageKey = "AuthenticationActivity";
-        private const string _mainMenuActivityPageKey = "MainMenuActivity";
-
         protected override void OnCreate(Bundle bundle)
         {
             if (!_iocContainerInitialized)
@@ -29,17 +26,8 @@ namespace Klootzakken.Client
                 ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
                 new NavigationServiceConfigurator().Configure();
-
-                //Add configurator
-                var dialog = new DialogService();
-                SimpleIoc.Default.Register<IDialogService>(() => dialog);
-
-                //TODO: add configuratore
-                var authenticationOptions = new AuthenticationOptions() { BaseUri = new Uri("http://www.glueware.nl/klootzakken/kz/") };
-                var authenticationService = new AuthenticationService(authenticationOptions);
-                var tempAuthTokenPoller = new TempAuthTokenPoller(authenticationService);
-                var authenticationController = new AuthenticationController(authenticationService, tempAuthTokenPoller, new SharedPreferenceHandler());
-                SimpleIoc.Default.Register<AuthenticationController>(() => authenticationController);
+                new DialogServiceConfigurator().Configure();
+                new AuthenticationControllerConfigurator().Configure();
 
                 _iocContainerInitialized = true;
             }
@@ -52,7 +40,7 @@ namespace Klootzakken.Client
             loginButton.Click += delegate
             {
                 var navigationService = ServiceLocator.Current.GetInstance<INavigationService>();
-                navigationService.NavigateTo(MainActivity._authenticationActivityPageKey);
+                navigationService.NavigateTo(NavigationServiceConfigurator._authenticationActivityPageKey);
             };
         }
     }
