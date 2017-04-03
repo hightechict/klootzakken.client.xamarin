@@ -25,8 +25,8 @@ namespace Klootzakken.Client.App.Configurators
 
         public void Configure()
         {
-            var authenticationOptions = new AuthenticationOptions() { BaseUri = new Uri("http://www.glueware.nl/klootzakken/kz/") };
-            var authenticationService = new AuthenticationService(new AuthenticationOptions() { BaseUri = new Uri("http://www.glueware.nl/klootzakken/kz/") });
+            var authenticationOptions = new AuthenticationOptions() { BaseUri = _klootzakkenWebUri };
+            var authenticationService = new AuthenticationService(authenticationOptions);
             var tempAuthTokenPoller = new TempAuthTokenPoller(authenticationService);
 
             var authenticationController = new AuthenticationController(authenticationService, tempAuthTokenPoller, _sharedPreferenceHander);
